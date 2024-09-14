@@ -1,4 +1,12 @@
 # Custom addition
+Algorithms/bin
+Algorithm//obj
+
+AlgorithmsGUI/bin
+AlgorithmsGUI/obj
+
+AlgorithmsTests/bin
+AlgorithmsTests/obj
 
 **/bin/
 **/obj/
