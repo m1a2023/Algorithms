@@ -15,6 +15,6 @@ namespace Algorithms.models
         where T : INumber<T>
     {
         Decimal GetExecutionTime(ICollection<T> data);
-        void Execute(ICollection<T> data);
+        T Execute(ICollection<T> data);
     }
 }
