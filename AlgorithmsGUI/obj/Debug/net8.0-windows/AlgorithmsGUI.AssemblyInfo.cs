@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AlgorithmsGUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9773b1839a236cd65bb91c89e02554d925db4f1b")]
 [assembly: System.Reflection.AssemblyProductAttribute("AlgorithmsGUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AlgorithmsGUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,15 +1,14 @@
 # Custom addition
-Algorithms/bin
-Algorithm//obj
+./Algorithms/bin
+./Algorithms/obj
+./AlgorithmsGUI/bin
+./AlgorithmsGUI/obj
 
-AlgorithmsGUI/bin
-AlgorithmsGUI/obj
+./AlgorithmsTests/bin
+./AlgorithmsTests/obj
 
-AlgorithmsTests/bin
-AlgorithmsTests/obj
-
-**/bin/
-**/obj/
+**/bin/**
+**/obj/**
 
 *.user
 *.suo
