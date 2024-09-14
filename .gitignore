@@ -1,0 +1,10 @@
+# Custom addition
+
+**/bin/
+**/obj/
+
+*.user
+*.suo
+*.log
+*.userosscache
+*.sln.docstates/publish/
