@@ -1,11 +1,10 @@
 # Custom addition
-.vs
+.vs/
+/.vs
 
 **/bin/**
 **/obj/**
 
-./AlgorithmsTests/bin
-./AlgorithmsTests/obj
 
 **/bin/
 **/obj/
