@@ -1,15 +1,16 @@
-using Algorithms.models;
+using Algorithms.models.Algorithms.models;
 using System.Diagnostics;
 using System.Numerics;
+///
+using Algorithms.models.Generator;
 
 namespace AlgorithmsTests
 {
     [TestClass]
-    public class SumTests
+    public class AdditionTests
     {
-        Sum<BigInteger> sumBigInteger = new Sum<BigInteger>();
-        Sum<Double> sumDouble = new Sum<Double>();
-        
+        Addition<BigInteger> sumBigInteger = new Addition<BigInteger>();
+        Addition<Double> sumDouble = new Addition<Double>();
         [TestMethod]
         public void ArrayTest()
         {
@@ -23,7 +24,6 @@ namespace AlgorithmsTests
              */
             BigInteger bigIntegerCheckSum = 0, Zero = 0;
             foreach (var item in array) { bigIntegerCheckSum += item; }
-                
 
             /**
              *  Output 

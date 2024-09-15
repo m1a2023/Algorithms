@@ -9,10 +9,10 @@ using Algorithms.models.Algorithms.models;
 namespace AlgorithmsTests
 {
     [TestClass]
-    public class ConstantTests
+    public class MultiplicationTests
     {
-        Constant<BigInteger> constantInt = new();
-        Constant<Double> constantDouble = new();
+        Multiplication<BigInteger> mulInt = new();
+        Multiplication<Double> mulDouble = new();
 
         [TestMethod]
         public void ArrayTest()
@@ -25,14 +25,15 @@ namespace AlgorithmsTests
             /**
              *  
              */
-            BigInteger one = BigInteger.One;   
+            BigInteger bigIntegerCheckMul = 1;
+            foreach (var item in array) { bigIntegerCheckMul *= item; }
 
             /**
              *  Output 
              */
-            Console.WriteLine("Execution " + array.GetType().Name + " array time: " + constantInt.GetExecutionTime(array));
+            Console.WriteLine("Execution " + array.GetType().Name + " array time: " + mulInt.GetExecutionTime(array));
 
-            Assert.AreEqual(one, constantInt.Execute(array));
+            Assert.AreEqual(bigIntegerCheckMul, mulInt.Execute(array));
         }
 
         [TestMethod]
@@ -42,18 +43,19 @@ namespace AlgorithmsTests
              *  Test Double list 
              */
             List<Double> list = new List<Double> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 1, 2, 999, 1000 };
-            
+
             /**
              * 
              */
-            Double one = 1;
+            Double listMul = 1;
+            foreach (var item in list) { listMul *= item; }
             
             /**
              *  Output 
              */
-            Console.WriteLine("Execution " + list.GetType().Name + " array time: " + constantDouble.GetExecutionTime(list));
+            Console.WriteLine("Execution " + list.GetType().Name + " array time: " + mulDouble.GetExecutionTime(list));
 
-            Assert.AreEqual(one, constantDouble.Execute(list));  
+            Assert.AreEqual(listMul, mulDouble.Execute(list));  
         }
     }
 }

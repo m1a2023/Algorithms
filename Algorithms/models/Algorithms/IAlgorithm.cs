@@ -5,7 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Algorithms.models
+namespace Algorithms.models.Algorithms
 {
     /// <summary>
     /// Represents algorithm and it's methods
@@ -14,7 +14,7 @@ namespace Algorithms.models
     internal interface IAlgorithm<T>
         where T : INumber<T>
     {
-        Decimal GetExecutionTime(ICollection<T> data);
+        decimal GetExecutionTime(ICollection<T> data);
         T Execute(ICollection<T> data);
     }
 }
