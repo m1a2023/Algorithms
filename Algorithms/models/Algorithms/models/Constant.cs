@@ -10,24 +10,20 @@ using Algorithms.models.Algorithms;
 
 namespace Algorithms.models.Algorithms.models
 {
-    /// <summary>
-    /// Implementation Constant function algorithm
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <summary>Implementation Constant function algorithm</summary>
+    /// <typeparam name="T">Inner data type</typeparam>
     public class Constant<T> : IAlgorithm<T>
         where T : INumber<T>
     {
         /// <summary>
         /// General methond that executes algorithm
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">Value collection, implemented via ICollection</param>
         /// <returns>Variable the same type as the argument</returns>
         public T Execute(ICollection<T> data) { T val = T.One; return val; }
 
-        /// <summary>
-        /// Starts the stopwatch, executes algorithm and stops stopwatch
-        /// </summary>
-        /// <param name="data"></param>
+        /// <summary>Starts the stopwatch, executes algorithm and stops stopwatch</summary>
+        /// <param name="data">Value collection, implemented via ICollection</param>
         /// <returns>Execution algorithm time in milliseconds</returns>
         public decimal GetExecutionTime(ICollection<T> data)
         {

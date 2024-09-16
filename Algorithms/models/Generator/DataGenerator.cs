@@ -8,42 +8,33 @@ using System.Threading.Tasks;
 
 namespace Algorithms.models.Generator
 {
-    /// <summary>
-    /// Implementation randomizer
-    /// </summary>
+    /// <summary>Implementation randomizer</summary>
     public class DataGenerator
     {
-        /// <summary>
-        /// 
-        /// </summary>
         private readonly Random random = new Random();
         
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <summary>Returns a random integer that is within a specified range.</summary>
         /// <returns>Randomized long (64bit int) from 0 to Integer.MAX_VALUE</returns>
-        public Int64 GetRandomInt64() { return random.NextInt64(); }
+        public Int64 GetRandomPositiveInt64() { return random.NextInt64(); }
+            
+        /// <summary>Returns a random integer that is within a specified range.</summary>
+        /// <returns>Randomized long (64bit int) from Int32.MinValue to Int32.MaxValue</returns>
+        public Int64 GetRandomInt64() { return random.Next(Int32.MinValue, Int32.MaxValue); }
         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="minValue"></param>
-        /// <param name="maxValue"></param>
+        /// <summary>Returns a random integer that is within a specified range.</summary>
+        /// <param name="minValue">The inclusive lower bound of the random number returned.</param>
+        /// <param name="maxValue">The exclusive upper bound of the random number returned. <paramref name="maxValue"/> must be greater than or equal to <paramref name="minValue"/>.</param>
         /// <returns>Randomized long (64bit int) from minValue to maxValue</returns>
         public Int64 GetRandomInt64(Int64 minValue, Int64 maxValue) 
         { 
             return random.NextInt64(minValue, maxValue); 
         }
         
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <summary>Returns a random Double</summary>
         /// <returns>Randomized Double from 0 to 1</returns>
         public Double GetRandomDouble() { return random.NextDouble(); }
         
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <summary>Returns a random Double with scaling factor</summary>
         /// <param name="scale"></param>
         /// <returns>Randomized value multiplied by 10 ^ scale</returns>
         public Double GetRandomDouble(Int32 scale) 

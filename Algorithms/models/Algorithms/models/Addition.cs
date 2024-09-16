@@ -8,17 +8,13 @@ using System.Threading.Tasks;
 
 namespace Algorithms.models.Algorithms.models
 {
-    /// <summary>
-    /// Implementation sum element algorithm
-    /// </summary>
+    /// <summary>Implementation sum element algorithm</summary>
     /// <typeparam name="T">Inner data type</typeparam>
     public class Addition<T> : IAlgorithm<T>
         where T : INumber<T>
     {
-        /// <summary>
-        /// General method that executes algorithm 
-        /// </summary>
-        /// <param name="data"></param>
+        /// <summary>General method that executes algorithm</summary>
+        /// <param name="data">Value collection, implemented via ICollection</param>
         /// <returns>Variable the same type as the argument</returns>
         public T Execute(ICollection<T> data)
         {
@@ -32,10 +28,8 @@ namespace Algorithms.models.Algorithms.models
             return tmp;
         }
 
-        /// <summary>
-        /// Starts the stopwatch, executes algorithm and stops stopwatch
-        /// </summary>
-        /// <param name="data"></param>
+        /// <summary>Starts the stopwatch, executes algorithm and stops stopwatch</summary>
+        /// <param name="data">Value collection, implemented via ICollection</param>
         /// <returns>Execution algorithm time in milliseconds</returns>
         public decimal GetExecutionTime(ICollection<T> data)
         {
