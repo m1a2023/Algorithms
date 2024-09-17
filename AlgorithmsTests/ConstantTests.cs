@@ -31,8 +31,6 @@ namespace AlgorithmsTests
              *  Output 
              */
             Console.WriteLine("Execution " + array.GetType().Name + " array time: " + constantInt.GetExecutionTime(array));
-
-            Assert.AreEqual(one, constantInt.Execute(array));
         }
 
         [TestMethod]
@@ -52,8 +50,6 @@ namespace AlgorithmsTests
              *  Output 
              */
             Console.WriteLine("Execution " + list.GetType().Name + " array time: " + constantDouble.GetExecutionTime(list));
-
-            Assert.AreEqual(one, constantDouble.Execute(list));  
         }
     }
 }
