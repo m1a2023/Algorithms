@@ -7,6 +7,9 @@ using Algorithms.models.Generator;
 
 namespace AlgorithmsTests
 {
+    /// <summary>
+    /// test
+    /// </summary>
     [TestClass]
     public class StructGeneratorTests
     {
