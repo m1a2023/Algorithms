@@ -13,7 +13,7 @@ namespace AlgorithmsTests
     public class MultiplicationTests
     {
         Multiplication<Int64> mulInt = new();
-        Multiplication<Int64> mulDouble = new();
+        Multiplication<int> mulDouble = new();
         
         StructGenerator structGenerator = new StructGenerator();
 
@@ -28,12 +28,7 @@ namespace AlgorithmsTests
             /**
              *  
              */
-            Int64 bigIntegerCheckMul = 1;
-            foreach (var item in array) { bigIntegerCheckMul *= item; }
-
-            /**
-             *  Output 
-             */
+        
             Console.WriteLine("Execution " + array.GetType().Name + " array time: " + mulInt.GetExecutionTime(array));
         }
 
@@ -43,7 +38,7 @@ namespace AlgorithmsTests
             /**
              *  Test list 
              */
-            List<Int64> list = structGenerator.GenerateList(1_000_000);
+            List<long> list = structGenerator.GenerateList(1_000_000, 0, 19999);
 
             /**
              * 

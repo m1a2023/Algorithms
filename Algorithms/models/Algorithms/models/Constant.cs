@@ -15,8 +15,8 @@ namespace Algorithms.models.Algorithms.models
     public class Constant<T> : Algorithm<T>
         where T : INumber<T>
     {
-        /// <summary>General methond that executes algorithm</summary>
-        /// <param name="data">Value collection, implemented via ICollection</param>
+        /// <summary>general methond that executes algorithm</summary>
+        /// <param name="data">value collection, implemented via icollection</param>
         public override void Execute(IList<T> data) { return; }
     }
 }
