@@ -6,15 +6,15 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Algorithms.models.Algorithms.models
+namespace Algorithms.models.Algorithms
 {
-    public abstract class Algorithm<T> 
+    public abstract class Algorithm<T>
         where T : INumber<T>
     {
 
         /// <summary>General method that executes algorithm</summary>
         /// <param name="data">Value collection, implemented via ICollection</param>
-        public abstract void Execute(IList<T> data); 
+        public abstract void Execute(IList<T> data);
 
         /// <summary>Starts the stopwatch, executes algorithm and stops stopwatch</summary>
         /// <param name="data">Value collection, implemented via ICollection</param>

@@ -12,10 +12,10 @@ namespace AlgorithmsTests
     [TestClass]
     public class MultiplicationTests
     {
-        Multiplication<Int64> mulInt = new();
-        Multiplication<int> mulDouble = new();
+        private readonly Multiplication<Int64> mulInt = new();
+        private readonly Multiplication<long> mulDouble = new();
         
-        StructGenerator structGenerator = new StructGenerator();
+        private readonly StructGenerator structGenerator = new StructGenerator();
 
         [TestMethod]
         public void ArrayTest()
@@ -33,6 +33,7 @@ namespace AlgorithmsTests
         }
 
         [TestMethod]
+        //GenerationListInt64Test()
         public void ListTest()
         {
             /**

@@ -7,16 +7,21 @@ using System.Threading.Tasks;
 
 namespace Algorithms.models.Algorithms.models
 {
+    /// <summary>Implementation timsort algorithm</summary>
+    /// <typeparam name="T">Inner data type</typeparam>
     public class TimSort<T> : Algorithm<T>
     where T : INumber<T>, IComparable<T>
     {
-        private const int MIN_MERGE = 32;
-
+        /// <summary>General method that executes algorithm</summary>
+        /// <param name="data">Value collection, implemented via ICollection</param>
+        /// <returns>Variable the same type as argument</returns>
         public override void Execute(IList<T> data)
         {
             Timsort(data, data.Count);
         }
 
+        private const int MIN_MERGE = 32;
+        
         private void Timsort(IList<T> arr, int n)
         {
             int minRun = GetMinRunLength(MIN_MERGE);
@@ -112,5 +117,4 @@ namespace Algorithms.models.Algorithms.models
             return n + r;
         }
     }
-
 }

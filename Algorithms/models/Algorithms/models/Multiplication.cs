@@ -5,11 +5,10 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using Algorithms.models.Algorithms;
 
 namespace Algorithms.models.Algorithms.models
 {
-    /// <summary>Implementation Multiplication algorithm</summary>
+    /// <summary>Implementation multiplication algorithm</summary>
     /// <typeparam name="T">Inner data type</typeparam>
     public class Multiplication<T> : Algorithm<T>
         where T : INumber<T>
