@@ -18,7 +18,7 @@ namespace AlgorithmsTests
         public void ExecuteTest()
         {
             long[] testArray = structGenerator.GenerateArray(10, 0, 100);
-
+            
             foreach (var item in testArray) Console.Write(item + " ");
             
             timSort.Execute(testArray);

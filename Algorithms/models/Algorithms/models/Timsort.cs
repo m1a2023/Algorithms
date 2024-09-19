@@ -12,6 +12,7 @@ namespace Algorithms.models.Algorithms.models
     public class TimSort<T> : Algorithm<T>
     where T : INumber<T>, IComparable<T>
     {
+
         /// <summary>General method that executes algorithm</summary>
         /// <param name="data">Value collection, implemented via ICollection</param>
         /// <returns>Variable the same type as argument</returns>
@@ -22,23 +23,23 @@ namespace Algorithms.models.Algorithms.models
 
         private const int MIN_MERGE = 32;
         
-        private void Timsort(IList<T> arr, int n)
+        private void Timsort(IList<T> arr, int exponent)
         {
             int minRun = GetMinRunLength(MIN_MERGE);
 
             // Sort individual subarrays of size MIN_MERGE
-            for (int i = 0; i < n; i += minRun)
+            for (int i = 0; i < exponent; i += minRun)
             {
-                InsertionSort(arr, i, Math.Min((i + MIN_MERGE - 1), (n - 1)));
+                InsertionSort(arr, i, Math.Min((i + MIN_MERGE - 1), (exponent - 1)));
             }
 
             // Merge subarrays
-            for (int size = minRun; size < n; size = 2 * size)
+            for (int size = minRun; size < exponent; size = 2 * size)
             {
-                for (int left = 0; left < n; left += 2 * size)
+                for (int left = 0; left < exponent; left += 2 * size)
                 {
                     int mid = left + size - 1;
-                    int right = Math.Min((left + 2 * size - 1), (n - 1));
+                    int right = Math.Min((left + 2 * size - 1), (exponent - 1));
 
                     if (mid < right)
                     {
@@ -69,10 +70,10 @@ namespace Algorithms.models.Algorithms.models
             List<T> leftArr = new List<T>(len1);
             List<T> rightArr = new List<T>(len2);
 
-            for (int x = 0; x < len1; x++)
-                leftArr.Add(arr[left + x]);
-            for (int x = 0; x < len2; x++)
-                rightArr.Add(arr[mid + 1 + x]);
+            for (int factor = 0; factor < len1; factor++)
+                leftArr.Add(arr[left + factor]);
+            for (int factor = 0; factor < len2; factor++)
+                rightArr.Add(arr[mid + 1 + factor]);
 
             int i = 0, j = 0, k = left;
 
@@ -106,15 +107,15 @@ namespace Algorithms.models.Algorithms.models
             }
         }
 
-        private int GetMinRunLength(int n)
+        private int GetMinRunLength(int exponent)
         {
             int r = 0;
-            while (n >= MIN_MERGE)
+            while (exponent >= MIN_MERGE)
             {
-                r |= (n & 1);
-                n >>= 1;
+                r |= (exponent & 1);
+                exponent >>= 1;
             }
-            return n + r;
+            return exponent + r;
         }
     }
 }
