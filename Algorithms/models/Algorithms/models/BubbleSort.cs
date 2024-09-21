@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace Algorithms.models.Algorithms.models
 {
-    /// <summary>
-    /// Implementation of bubble sort algorithm
-    /// </summary>
+    /// <summary>Implementation of bubble sort algorithm </summary>
     /// <typeparam name="T"></typeparam>
     public class BubbleSort<T> : Algorithm<T> 
         where T : INumber<T>

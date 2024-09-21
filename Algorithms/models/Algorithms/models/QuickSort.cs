@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Algorithms.models.Algorithms.models
 {
+    /// <summary>Implementation quick sort algorithm</summary>
+    /// <typeparam name="T">Inner data type</typeparam>
     public class QuickSort<T> : Algorithm<T> 
         where T : INumber<T>, IComparable<T>
     {

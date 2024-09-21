@@ -26,9 +26,10 @@ namespace Algorithms.models.Algorithms.models
 
 				for (int i = 1; i < data.Count; i++)
 				{
-					//res += data[i] * Math.Pow(1.5, i - 1);
+					res += data[i] * T.CreateChecked(Math.Pow(1.5, i - 1));
 				}
 					
+
 			}
 
 		}   

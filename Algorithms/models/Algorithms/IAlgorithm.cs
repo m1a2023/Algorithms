@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Algorithms.models.Algorithms
 {
+    // ! DEPRICATED
+    //  DO NOT USE! 
     /// <summary>Represents algorithm and it's methods</summary>
     /// <typeparam name="T"></typeparam>
     public interface IAlgorithm<T>
