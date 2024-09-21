@@ -167,6 +167,7 @@ namespace Algorithms.models.Algorithms.models
 
 				Result = Pow(this.Base, this.Exponent);
 			}
+
             public override void Execute(IList<T> data)
             {
 				if (data.Count != 2) 

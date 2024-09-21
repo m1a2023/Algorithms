@@ -19,7 +19,6 @@ namespace Algorithms.models.Algorithms.models
         /// <summary>Default constructor</summary>
         public Addition() { } 
 
-
 		/// <summary>Extended constructor</summary>
 		/// <param name="Base"></param>
 		/// <param name="Exponent"></param>

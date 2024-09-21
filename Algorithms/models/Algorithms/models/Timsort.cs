@@ -21,7 +21,7 @@ namespace Algorithms.models.Algorithms.models
 			this.Data = Data;
 			this.SortedData = new T[Data.Count];
 
-			for (int i = 0; i < Data.Count; i++) SortedData[i] = Data[i];
+			for (int i = 0; i < this.Data.Count; i++) SortedData[i] = this.Data[i];
 
 			Execute(SortedData);
 		}
