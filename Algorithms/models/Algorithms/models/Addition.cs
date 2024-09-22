@@ -71,5 +71,6 @@ namespace Algorithms.models.Algorithms.models
                 $"Result: {Result} [{Result.GetType()}]\n" +
                 $"Execution time: {GetExecutionTime()}";
         }
+        public T GetResult() { return Result; }
     }
 }

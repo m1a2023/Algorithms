@@ -10,7 +10,51 @@ namespace AlgorithmsTests
     {
         Addition<BigInteger> sumBigInteger = new Addition<BigInteger>();
         Addition<Double> sumDouble = new Addition<Double>();
-        
+
+        StructGenerator sG = new StructGenerator();
+
+        [TestMethod]
+        public void ConstructorsTest() 
+        {
+            //Default constructor
+            var additionDef = new Addition<long>();
+            Assert.IsNotNull(additionDef);
+            additionDef.GetExecutionTime(sG.GenerateArray(10000));
+
+            //Extended constructor for array
+            int[] dataArr = new[] {1, 2, 3, 4};
+            var additionExtArr = new Addition<int>(dataArr);
+            string output = additionExtArr.ToString();
+            string expectedOutput = "Original collection: 1, 2, 3, 4 [System.Int32[]]";
+            string expectedResult = "Result: 10 [System.Int32]";
+            Assert.IsTrue(output.Contains(expectedOutput));
+            Assert.IsTrue(output.Contains(expectedResult));
+            Console.WriteLine(output);
+
+            //Extended constructor for list
+            List<long> dataList = new List<long> { 1, 2, 3, 4 };
+            var additionExtList = new Addition<long>(dataList);
+            output = additionExtList.ToString();
+            expectedOutput = "Original collection: 1, 2, 3, 4 " +
+                "[System.Collections.Generic.List`1[System.Int64]]";
+            expectedResult = "Result: 10 [System.Int64]";
+            Assert.IsTrue(output.Contains(expectedOutput));
+            Assert.IsTrue(output.Contains(expectedResult));
+            Console.WriteLine(output);
+        }
+
+        [TestMethod]
+        public void AdditionCorrectAnswersTest()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                var array = sG.GenerateList(2000, -10000, 200000);
+                var answerTest1 = new Addition<long>(array);
+                //Console.WriteLine(answerTest1.ToString());
+                Assert.AreEqual(answerTest1.GetResult(), array.Sum());
+            }
+        }
+
         [TestMethod]
         public void ArrayTest()
         {

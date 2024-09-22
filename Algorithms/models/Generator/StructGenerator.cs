@@ -19,6 +19,9 @@ namespace Algorithms.models.Generator
 		/// <returns>Generated array</returns>
 		public Int64[] GenerateArray(Int64 size, Int64 minValue, Int64 maxValue) 
 		{
+			if (size < 0)
+				throw new ArgumentOutOfRangeException("size");
+
 			Int64[] arr = new Int64[size];
 			
 			for (Int64 i = 0; i < size; i++)
@@ -44,7 +47,10 @@ namespace Algorithms.models.Generator
 		/// <returns>Generated list</returns>
 		public List<Int64> GenerateList(Int64 size, Int64 minValue, Int64 maxValue)
 		{
-			List<Int64> list = new List<Int64>();
+            if (size < 0)
+                throw new ArgumentOutOfRangeException("size");
+
+            List<Int64> list = new List<Int64>();
 
 			for (Int64 i = 0;  i < size; i++)
 			{
