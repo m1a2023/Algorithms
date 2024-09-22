@@ -20,16 +20,16 @@ namespace AlgorithmsTests
 		{
 			var arr = new long[] { 2, 5 };
 			
-			var _simple  = new Pow.Simple<short>(2, 2);
+			var _simple  = new Pow.Simple<short>([2, 2]);
 			Console.WriteLine(_simple.ToString());
 
-			var _rec = new Pow.Recursive<Int128>(4, 40);
+			var _rec = new Pow.Recursive<Int128>([4, 40]);
 			Console.WriteLine(_rec.ToString());
 
 			//var _quick = new Pow.Quick<long>(2, 10);
-			Console.WriteLine(new Pow.Quick<long> (2, 10).ToString());
+			Console.WriteLine(new Pow.Quick<long> ([2, 10]).ToString());
 
-			Console.WriteLine(new Pow.ClassicQuick<long>(10, 10).ToString());
+			Console.WriteLine(new Pow.ClassicQuick<long>([10, 10]).ToString());
 		}
 	}
 }

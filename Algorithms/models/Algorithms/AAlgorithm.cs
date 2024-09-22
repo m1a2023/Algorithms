@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Algorithms.models.Algorithms
 {
-    public abstract class Algorithm<T>
+    public abstract class AAlgorithm<T>
         where T : INumber<T>
     {
 

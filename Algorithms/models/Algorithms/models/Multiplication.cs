@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,36 +11,28 @@ namespace Algorithms.models.Algorithms.models
 {
     /// <summary>Implementation multiplication algorithm</summary>
     /// <typeparam name="T">Inner data type</typeparam>
-    public class Multiplication<T> : Algorithm<T>
+    public class Multiplication<T> : AProcessingAlgorithm<T>
         where T : INumber<T>
     {
-        protected IList<T> Data { get; private set; }        
-        protected T Result { get; private set; }
-
         /// <summary>Default constructor</summary>
-        public Multiplication() { } 
+        public Multiplication() { }
 
 		/// <summary>Extended constructor</summary>
 		/// <param name="Data"></param>
-        public Multiplication(IList<T> Data)
-        {
-            this.Data = Data;
-            Result = Multiplicate(this.Data);
-        }
-            
-        public T GetResult()
-        {
-			if (Data == default) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
-            return Result; 
-        }
+        public Multiplication(IList<T> Data) : base(Data) { }
 
         /// <summary>General method that executes algorithm</summary>
         /// <param name="data">Value collection, implemented via ICollection</param>
         public override void Execute(IList<T> data)
         {
-            Multiplicate(data);
+            Process(data);
         }
-       
+
+        public override T Process(IList<T> Data)
+        {
+            return Multiplicate(Data);  
+        }
+
         private T Multiplicate(IList<T> data)
         {
             T tmp = T.One;
@@ -50,30 +43,6 @@ namespace Algorithms.models.Algorithms.models
             }
 
             return tmp; 
-        }
-		
-        /// <summary>Additional method for extended constructor</summary>
-		/// <returns>Execution algorithm time in milliseconds</returns>
-        public decimal GetExecutionTime()
-        {
-            Stopwatch stopwatch = Stopwatch.StartNew(); 
-
-            Execute(Data);
-
-            stopwatch.Stop();   
-
-            return new decimal (stopwatch.Elapsed.TotalMilliseconds);
-        }
-        
-        
-		/// <summary>String information representation</summary>
-		/// <returns>String of fields</returns>
-        public override string ToString()
-        {
-            string data = String.Join(", ", Data);
-            return $"Original collection: {data} [{Data.GetType()}]\n" +
-                $"Result: {Result} [{Result.GetType()}]\n" +
-                $"Execution time: {GetExecutionTime()}";
         }
     }
 }

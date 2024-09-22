@@ -21,13 +21,10 @@ namespace AlgorithmsTests
             List<Int64> list = generator.GenerateList(10, 0, 100);
 
             bubbleSort.Execute(list);
-            Console.WriteLine(String.Join(", ", list));
-            //Console.WriteLine(bubbleSort.GetExecutionTime(list));
 
-            //Console.WriteLine(new BubbleSort<long>([90, 11, 39, 0]).ToString());
-
-            Console.WriteLine(new BubbleSort<long>(generator.GenerateArray(10, 0, 100)).ToString()); 
-            Console.WriteLine(new BubbleSort<long>(generator.GenerateArray(10, 0, 100)).GetExecutionTime()); 
+            var bs = new BubbleSort<long>(generator.GenerateArray(10, 0, 100));
+            Console.WriteLine(bs.ToString()); 
+            Console.WriteLine(bs.GetExecutionTime()); 
         }
     }
 }

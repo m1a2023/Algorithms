@@ -14,28 +14,15 @@ namespace Algorithms.models.Algorithms.models
 	{
 		/// <summary>Implementation of naive polynomial algorithm</summary>
 		/// <typeparam name="T"></typeparam>
-		public class Naive<T> : Algorithm<T> 
+		public class Naive<T> : AProcessingAlgorithm<T>
 			where T : INumber<T>, IFloatingPoint<T>
 		{
-			protected IList<T> Data { get; private set; } 
-			protected T Result { get; private set; }
-		
 			/// <summary>Default constructor</summary>
 			public Naive() { }
 			
 			/// <summary>Extended constructor</summary>
 			/// <param name="Data"></param>
-			public Naive(IList<T> Data)
-			{
-				this.Data = Data;
-				Result = Calculate(this.Data);
-			}
-
-			public T GetResult()
-			{
-				if (Data == default) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
-				return Result;
-			}
+			public Naive(IList<T> Data) : base(Data) { }
 
 			/// <summary>General method that executes algorithm</summary>
 			/// <param name="data">Value collection, implemented via ICollection</param>
@@ -46,8 +33,13 @@ namespace Algorithms.models.Algorithms.models
 				
 				Calculate(data);
 			}
-			
-			private T Calculate(IList<T> data)
+
+            public override T Process(IList<T> Data)
+            {
+                return Calculate(Data);
+            }
+
+            private T Calculate(IList<T> data)
 			{
 				T res = T.Zero;
 
@@ -58,58 +50,27 @@ namespace Algorithms.models.Algorithms.models
 				
 				return res;
 			}
-			
-			/// <summary>Additional method for extended constructor</summary>
-			/// <returns>Execution algorithm time in milliseconds</returns>
-			public decimal GetExecutionTime()
-			{
-				Stopwatch stopwatch = Stopwatch.StartNew();
-
-				Execute(Data);
-
-				stopwatch.Stop();
-
-				return new decimal(stopwatch.Elapsed.TotalMilliseconds);
-			}
-
-			/// <summary>String information representation</summary>
-			/// <returns>String of fields</returns>
-            public override string ToString()
-            {
-				string data = String.Join(", ", Data);
-				return $"Original collection: {data} [{Data.GetType()}]\n" +
-					$"Result: {Result} [{Result.GetType()}]\n" +
-					$"Execution time: {GetExecutionTime()}";
-            }
         }   
-		public class Horner<T> : Algorithm<T> 
+		public class Horner<T> : AProcessingAlgorithm<T>
 			where T : INumber<T>
 		{
-			protected IList<T> Data { get; private set; } 
-			protected T Result { get; private set; }
-
 			/// <summary>Default constructor</summary>
 			public Horner() { }
 			
 			/// <summary>Extended constructor</summary>
 			/// <param name="Data"></param>
-			public Horner(IList<T> Data)
-			{
-				this.Data = Data;
-				Result = Calculate(this.Data);
-			}
-
-			public T GetResult()
-			{
-				if (Data == default) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
-				return Result;
-			}
+			public Horner(IList<T> Data) : base(Data) { }
 			
 			/// <summary>General method that executes algorithm</summary>
 			/// <param name="data">Value collection, implemented via ICollection</param>
             public override void Execute(IList<T> data)
             {
 				Calculate(data);
+            }
+
+            public override T Process(IList<T> Data)
+            {
+				return Calculate(Data);
             }
 
             private T Calculate(IList<T> data)
@@ -123,29 +84,6 @@ namespace Algorithms.models.Algorithms.models
 				}
 
 				return res;
-			}
-
-			/// <summary>Additional method for extended constructor</summary>
-			/// <returns>Execution algorithm time in milliseconds</returns>
-			public decimal GetExecutionTime()
-			{
-				Stopwatch stopwatch = Stopwatch.StartNew();
-
-				Execute(Data);
-
-				stopwatch.Stop();
-
-				return new decimal(stopwatch.Elapsed.TotalMilliseconds);
-			}
-
-			/// <summary>String information representation</summary>
-			/// <returns>String of fields</returns>
-            public override string ToString()
-			{
-				string data = String.Join(", ", Data);
-				return $"Original collection: {data} [{Data.GetType()}]\n" +
-					$"Result: {Result} [{Result.GetType()}]\n" +
-					$"Execution time: {GetExecutionTime()}";
 			}
 		}
 	}

@@ -13,52 +13,31 @@ namespace Algorithms.models.Algorithms.models
 	{
 		/// <summary>Implementation of simple pow algorithm</summary>
 		/// <typeparam name="T">Supports Integer types between short and Int64</typeparam>
-		public class Simple<T> : Algorithm<T> 
+		public class Simple<T> : AProcessingAlgorithm<T>
 			where T : INumber<T>, IBinaryInteger<T>
 		{
-			protected T Base { get; private set; }
-			protected T Exponent { get; private set; }
-			protected T Result { get; private set; }
-			
 			/// <summary>Default constructor</summary>
 			public Simple() { }
-				
-			/// <summary>Extended constructor</summary>
-			/// <param name="Base"></param>
-			/// <param name="Exponent"></param>
-			public Simple(T Base, T Exponent)
-			{
-				this.Base = Base;
-				this.Exponent = Exponent; 
-				Result = Pow(this.Base, this.Exponent);
-			}
 
-			public T GetResult()
-			{
-				if (Result == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
-				return Result;	
-			}
-        	
+			/// <summary>Extended constructor</summary>
+			/// <param name="Data"></param>
+			public Simple(IList<T> Data) : base(Data) { }
+			
 			public override void Execute(IList<T> data)
 			{
-				Pow(data[0], data[1]);
+				if (data.Count != 2)
+					throw new ArgumentException("There must collection with two values");
+				Pow(data);
 			}
 
-			/// <summary>Additional method for extended constructor</summary>
-			/// <returns>Execution algorithm time in milliseconds</returns>
-			public decimal GetExecutionTime()
+			public override T Process(IList<T> Data)
 			{
-				Stopwatch stopwatch = Stopwatch.StartNew();
-
-				Execute([Base, Exponent]);
-
-				stopwatch.Stop();
-
-				return new decimal(stopwatch.Elapsed.TotalMilliseconds);
+				return Pow(Data); 
 			}
 
-			private T Pow(T factor, T exponent)
+			private T Pow(IList<T> data)
 			{
+				T factor = data[0], exponent = data[1];
 				T res = T.One;
 				
 				for (int i = 0; i < Convert.ToInt64(exponent); i++)
@@ -68,146 +47,79 @@ namespace Algorithms.models.Algorithms.models
 
 				return res;
 			}
-			
-			private Int64 Pow(Int64 factor, Int64 exponent) => Pow(Convert.ToInt64(factor), Convert.ToInt64(exponent));
-			private decimal Pow(double factor, double exponent) => Pow(Convert.ToDouble(factor), Convert.ToDouble(exponent));
-			
-			/// <summary>String information representation</summary>
-			/// <returns>String of fields</returns>
-			public override string ToString()
-            {
-				return $"Base: {Base} [{Base.GetType()}], Exponent: {Exponent} [{Exponent.GetType()}], \n" +
-					$"Result: {Result} [{Result.GetType()}], Time: {GetExecutionTime([Base, Exponent])}ms";
-            }			
 		}
 		
 		/// <summary>Implementation of recursive pow algorithm</summary>
 		/// <typeparam name="T">Supports Integer types between short and Int128</typeparam>
-		public class Recursive<T> : Algorithm<T> 
+		public class Recursive<T> :  AProcessingAlgorithm<T>
 			where T : INumber<T>
 		{
-			protected T Base { get; private set; }
-			protected T Exponent { get; private set; }
-			protected T Result { get; private set; }
-
 			/// <summary>Default constructor</summary>
 			public Recursive() { }
 
 			/// <summary>Extended constructor</summary>
 			/// <param name="Base"></param>
 			/// <param name="Exponent"></param>
-			public Recursive(T Base, T Exponent)
-            {
-				this.Base = Base;
-				this.Exponent = Exponent; 
-				Result = Pow(this.Base, this.Exponent);
-            }
-			
-			public T GetResult()
-			{
-				if (Result == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
-				return Result;	
-			}
-          
+			public Recursive(IList<T> Data) : base(Data) { }
+		  
 			public override void Execute(IList<T> data)
 			{
 				if (data.Count != 2)
 					throw new ArgumentException("Invalid elements quantity exception");
 				
-				Pow(data[0], data[1]);
+				Pow(data);
+			}
+			
+			public override T Process(IList<T> Data)
+			{
+				return Pow(Data);
 			}
 
-			/// <summary>Additional method for extended constructor</summary>
-			/// <returns>Execution algorithm time in milliseconds</returns>
-			public decimal GetExecutionTime()
+			private T Pow(IList<T> data)
 			{
-				Stopwatch stopwatch = Stopwatch.StartNew();
+				T factor = data[0], exponent = data[1];
 
-				Execute([Base, Exponent]);
-
-				stopwatch.Stop();
-
-				return new decimal(stopwatch.Elapsed.TotalMilliseconds);
-			}
-
-			private T Pow(T factor, T exponent)
-			{
 				if (exponent == T.Zero) return T.One;
 
-				T f = Pow(factor, exponent / T.CreateChecked(2));
+				T f = Pow([factor, exponent / T.CreateChecked(2)]);
 
 				if (exponent % T.CreateChecked(2) == T.One)
 					return f * f * factor;
 				else
 					return f * f;
 			}
-
-			private Int128 Pow(Int64 factor, Int64 exponent) => Pow(Convert.ToInt64(factor), Convert.ToInt64(exponent));
-			private decimal Pow(double factor, double exponent) => Pow(Convert.ToDouble(factor), Convert.ToDouble(exponent));
-			
-			/// <summary>String information representation</summary>
-			/// <returns>String of fields</returns>
-            public override string ToString()
-            {
-				return $"Base: {Base} [{Base.GetType()}], Exponent: {Exponent} [{Exponent.GetType()}], \n" +
-					$"Result: {Result} [{Result.GetType()}], Time: {GetExecutionTime([Base, Exponent])}ms";
-            }
-        }
+		}
 
 		/// <summary>Implementation of quick pow algorithm</summary>
 		/// <typeparam name="T"></typeparam>
-		public class Quick<T> : Algorithm<T> 
+		public class Quick<T> : AProcessingAlgorithm<T>
 			where T : INumber<T>
 
 		{
-			protected T Base { get; private set; }
-			protected T Exponent { get; private set; }
-			protected T Result { get; private set; }
-			
 			/// <summary>Default constructor</summary>
 			public Quick() { }
-			 
+
 			/// <summary>Extended constructor</summary>
 			/// <param name="Base"></param>
 			/// <param name="Exponent"></param>
-			public Quick(T Base, T Exponent)
-			{
-				this.Base = Base;
-				this.Exponent = Exponent;
-
-				Result = Pow(this.Base, this.Exponent);
-			}
-
-			public T GetResult()
-			{
-				if (Result == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
-				return Result;	
-			}
-            
+			public Quick(IList<T> Data) : base(Data) { }
+			
 			public override void Execute(IList<T> data)
-            {
+			{
 				if (data.Count != 2)
 					throw new ArgumentException("Invalid elements quantity exception");
 				
-				Pow(data[0], data[1]);
-            }
-
-			/// <summary>Additional method for extended constructor</summary>
-			/// <returns>Execution algorithm time in milliseconds</returns>
-			public decimal GetExecutionTime()
-			{
-				Stopwatch stopwatch = Stopwatch.StartNew();
-
-				Execute([Base, Exponent]);
-
-				stopwatch.Stop();
-
-				return new decimal (stopwatch.Elapsed.TotalMilliseconds);
+				Pow(data);
 			}
 
-			private T Pow(T factor, T exponent)
+			public override T Process(IList<T> Data)
 			{
-				T f;
+				return Pow(Data);
+			}
+
+			private T Pow(IList<T> data)
+			{
+				T f, factor = data[0], exponent = data[1];
 
 				if (exponent % T.CreateChecked(2) == T.One)
 					f = factor;
@@ -226,27 +138,13 @@ namespace Algorithms.models.Algorithms.models
 
 				return f;
 			}
-	
-			private Int128 Pow(Int64 factor, Int64 exponent) => Pow(Convert.ToInt64(factor), Convert.ToInt64(exponent));
-			private decimal Pow(double factor, double exponent) => Pow(Convert.ToDouble(factor), Convert.ToDouble(exponent));
-			
-			/// <summary>String information representation</summary>
-			/// <returns>String of fields</returns>
-            public override string ToString()
-            {
-				return $"Base: {Base} [{Base.GetType()}], Exponent: {Exponent} [{Exponent.GetType()}], \n" +
-					$"Result: {Result} [{Result.GetType()}], Time: {GetExecutionTime([Base, Exponent])}ms";
-            }
-        }
+		}
 
 		/// <summary>Implementation of classick quick pow algorithm</summary>
 		/// <typeparam name="T"></typeparam>
-		public class ClassicQuick<T> : Algorithm<T> 
+		public class ClassicQuick<T> : AProcessingAlgorithm<T>
 			where T : INumber<T>
 		{
-			protected T Base { get; private set; }
-			protected T Exponent { get; private set; }
-			protected T Result { get; private set; }
 			
 			/// <summary>Default constructor</summary>
 			public ClassicQuick() { }
@@ -254,44 +152,24 @@ namespace Algorithms.models.Algorithms.models
 			/// <summary>Extended constructor</summary>
 			/// <param name="Base"></param>
 			/// <param name="Exponent"></param>
-			public ClassicQuick(T Base, T Exponent)
-			{
-				this.Base = Base;
-				this.Exponent = Exponent;
-				
-				Result = Pow(this.Base, this.Exponent);
-			}
-
-			public T GetResult()
-			{
-				if (Result == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
-				return Result;	
-			}
-            
+			public ClassicQuick(IList<T> Data) : base(Data) { }
+			
 			public override void Execute(IList<T> data)
-            {
+			{
 				if (data.Count != 2)
 					throw new ArgumentException("Invalid elements quantity exception");
 				
-				Pow(data[0], data[1]);
-            }
-				
-			/// <summary>Additional method for extended constructor</summary>
-			/// <returns>Execution algorithm time in milliseconds</returns>
-			public decimal GetExecutionTime()
-			{
-				Stopwatch stopwatch = Stopwatch.StartNew();
-
-				Execute([Base, Exponent]);
-
-				stopwatch.Stop();
-
-				return new decimal (stopwatch.Elapsed.TotalMilliseconds);
+				Pow(data);
 			}
 
-			private T Pow(T factor, T exponent)
+            public override T Process(IList<T> Data)
+            {
+				return Pow(Data);
+            }
+
+            private T Pow(IList<T> data)
 			{
-				T f = T.One;
+				T f = T.One, factor = data[0], exponent = data[1];
 
 				while (exponent != T.Zero)
 				{
@@ -309,17 +187,6 @@ namespace Algorithms.models.Algorithms.models
 
 				return f;
 			}
-			
-			private Int128 Pow(Int64 factor, Int64 exponent) => Pow(Convert.ToInt64(factor), Convert.ToInt64(exponent));
-			private decimal Pow(double factor, double exponent) => Pow(Convert.ToDouble(factor), Convert.ToDouble(exponent));
-			
-			/// <summary>String information representation</summary>
-			/// <returns>String of fields</returns>
-            public override string ToString()
-            {
-				return $"Base: {Base} [{Base.GetType()}], Exponent: {Exponent} [{Exponent.GetType()}], \n" +
-					$"Result: {Result} [{Result.GetType()}], Time: {GetExecutionTime()}ms";
-            }
-        }
+		}
 	}
 }
