@@ -33,7 +33,7 @@ namespace Algorithms.models.Algorithms.models
 
 			public T GetResult()
 			{
-				if (Result == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
+				if (Data == default) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
 				return Result;
 			}
 
@@ -90,7 +90,9 @@ namespace Algorithms.models.Algorithms.models
 
 			/// <summary>Default constructor</summary>
 			public Horner() { }
-
+			
+			/// <summary>Extended constructor</summary>
+			/// <param name="Data"></param>
 			public Horner(IList<T> Data)
 			{
 				this.Data = Data;
@@ -99,7 +101,7 @@ namespace Algorithms.models.Algorithms.models
 
 			public T GetResult()
 			{
-				if (Result == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
+				if (Data == default) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
 				return Result;
 			}
 			
@@ -108,11 +110,6 @@ namespace Algorithms.models.Algorithms.models
             public override void Execute(IList<T> data)
             {
 				Calculate(data);
-            }
-
-            public void Execute()
-            {
-				Calculate(Data);
             }
 
             private T Calculate(IList<T> data)

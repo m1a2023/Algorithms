@@ -21,15 +21,18 @@ namespace Algorithms.models.Algorithms.models
 		public Constant() { } 
         
 		/// <summary>Extended constructor</summary>
-        /// <param name="Base"></param>
-        /// <param name="Exponent"></param>
+        /// <param name="Data"></param>
 		public Constant(IList<T> Data)
 		{
 			this.Data = Data;
 			Result = T.One;
 		}
 
-		public T GetResult() => Result;
+		public T GetResult()
+		{
+			if (Data == default) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
+            return Result; 
+		}
 
 		/// <summary>Additional method for extended constructor</summary>
 		/// <returns>Execution algorithm time in milliseconds</returns>

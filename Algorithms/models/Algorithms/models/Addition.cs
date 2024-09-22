@@ -20,8 +20,7 @@ namespace Algorithms.models.Algorithms.models
         public Addition() { } 
 
 		/// <summary>Extended constructor</summary>
-		/// <param name="Base"></param>
-		/// <param name="Exponent"></param>
+		/// <param name="Data"></param>
         public Addition(IList<T> Data)
         {
             this.Data = Data;

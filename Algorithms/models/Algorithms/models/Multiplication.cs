@@ -29,7 +29,7 @@ namespace Algorithms.models.Algorithms.models
             
         public T GetResult()
         {
-			if (Result == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
+			if (Data == default) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
             return Result; 
         }
 

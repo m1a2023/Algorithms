@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -23,7 +24,7 @@ namespace Algorithms.models.Algorithms.models
 		public TimSort(IList<T> Data)
 		{
 			this.Data = Data;
-			this.SortedData = new T[Data.Count];
+			SortedData = new T[Data.Count];
 
 			for (int i = 0; i < this.Data.Count; i++) SortedData[i] = this.Data[i];
 
@@ -36,6 +37,31 @@ namespace Algorithms.models.Algorithms.models
 		public override void Execute(IList<T> data)
 		{
 			Sort(data, data.Count);
+		}
+
+		public IList<T> GetSortedData()
+		{
+			if (Data == default) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
+			
+			return SortedData;	
+		}
+
+		/// <summary>Additional method for extended constructor</summary>
+		/// <returns>Execution algorithm time in milliseconds</returns>
+		public decimal GetExecutionTime()
+		{
+			if (Data == default) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
+
+			IList<T> tmp = new T[Data.Count];
+			for (int i = 0; i < Data.Count; i++) { tmp[i] = Data[i];}
+
+			Stopwatch stopwatch = Stopwatch.StartNew(); 
+			
+			Execute(tmp);
+			
+			stopwatch.Stop();
+
+			return new decimal (stopwatch.Elapsed.TotalMilliseconds);
 		}
 
 		private const int MIN_MERGE = 32;
@@ -74,7 +100,7 @@ namespace Algorithms.models.Algorithms.models
 			string sortedData = String.Join(", ", SortedData);
 			return $"Original collection: {data} [{Data.ToString()}], \n" +
 				$"Sorted collection: {sortedData} [{SortedData.ToString()}], \n" +
-				$"Execution time: {GetExecutionTime(Data)}";
+				$"Execution time: {GetExecutionTime()}";
         }
 
         private void InsertionSort(IList<T> arr, int left, int right)

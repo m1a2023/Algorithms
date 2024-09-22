@@ -25,6 +25,9 @@ namespace AlgorithmsTests
             //Console.WriteLine(bubbleSort.GetExecutionTime(list));
 
             //Console.WriteLine(new BubbleSort<long>([90, 11, 39, 0]).ToString());
+
+            Console.WriteLine(new BubbleSort<long>(generator.GenerateArray(10, 0, 100)).ToString()); 
+            Console.WriteLine(new BubbleSort<long>(generator.GenerateArray(10, 0, 100)).GetExecutionTime()); 
         }
     }
 }

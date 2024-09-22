@@ -20,8 +20,7 @@ namespace Algorithms.models.Algorithms.models
         public BubbleSort() { } 
 
 		/// <summary>Extended constructor</summary>
-		/// <param name="Base"></param>
-		/// <param name="Exponent"></param>
+		/// <param name="Data"></param>
         public BubbleSort(IList<T> Data)
         {
             this.Data = Data;
@@ -29,27 +28,33 @@ namespace Algorithms.models.Algorithms.models
 
             for (int i = 0; i < this.Data.Count; i++) { SortedData[i] = this.Data[i];}
 
-            Sort(SortedData);
+            Execute(SortedData);
         }
 
 		public IList<T> GetSortedData()
 		{
-			if (SortedData == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
-			return SortedData;	
+			if (Data == default) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
+			
+            return SortedData;	
 		}
             
 		/// <summary>Additional method for extended constructor</summary>
 		/// <returns>Execution algorithm time in milliseconds</returns>
-        public decimal GetExecutionTime()
-        {
-            Stopwatch stopwatch = new Stopwatch();  
-            
-            Execute(SortedData);
-            
-            stopwatch.Stop();
+		public decimal GetExecutionTime()
+		{
+			if (Data == default) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
 
-            return new decimal (stopwatch.Elapsed.TotalMilliseconds);
-        }
+			IList<T> tmp = new T[Data.Count];
+			for (int i = 0; i < Data.Count; i++) { tmp[i] = Data[i];}
+
+			Stopwatch stopwatch = Stopwatch.StartNew(); 
+			
+			Execute(tmp);
+			
+			stopwatch.Stop();
+
+			return new decimal (stopwatch.Elapsed.TotalMilliseconds);
+		}
 
         /// <summary>General methond that executes algorithm</summary>
         /// <param name="data">value collection, implemented via icollection</param>
@@ -82,7 +87,7 @@ namespace Algorithms.models.Algorithms.models
 			string sortedData = String.Join(", ", SortedData);
 			return $"Original collection: {data} [{Data.ToString()}], \n" +
 				$"Sorted collection: {sortedData} [{SortedData.ToString()}], \n" +
-				$"Execution time: {GetExecutionTime(Data)}";
+				$"Execution time: {GetExecutionTime()}";
         }
     }
 }

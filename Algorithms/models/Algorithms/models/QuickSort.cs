@@ -29,12 +29,13 @@ namespace Algorithms.models.Algorithms.models
 
 			for (int i = 0; i < this.Data.Count; i++) { SortedData[i] = this.Data[i];}
 
-			Execute();
+			Execute(SortedData);
 		}
 
 		public IList<T> GetSortedData()
 		{
-			if (SortedData == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
+			if (Data == default) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
+			
 			return SortedData;	
 		}
 			
@@ -43,14 +44,6 @@ namespace Algorithms.models.Algorithms.models
 		public override void Execute(IList<T> data)
 		{
 			QuickSortInternal(data, 0, data.Count - 1);
-		}
-
-		/// <summary>Method for extended constructor</summary>
-		public void Execute()
-		{
-			if (Data == default) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
-			
-			QuickSortInternal(SortedData, 0, Data.Count - 1);
 		}
 		
 		/// <summary>Additional method for extended constructor</summary>
@@ -62,7 +55,7 @@ namespace Algorithms.models.Algorithms.models
 			IList<T> tmp = new T[Data.Count];
 			for (int i = 0; i < Data.Count; i++) { tmp[i] = Data[i];}
 
-			Stopwatch stopwatch = new Stopwatch();  
+			Stopwatch stopwatch = Stopwatch.StartNew(); 
 			
 			Execute(tmp);
 			
