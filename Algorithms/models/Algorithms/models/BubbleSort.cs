@@ -31,8 +31,13 @@ namespace Algorithms.models.Algorithms.models
 
             Sort(SortedData);
         }
-        
 
+		public IList<T> GetSortedData()
+		{
+			if (SortedData == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
+			return SortedData;	
+		}
+            
 		/// <summary>Additional method for extended constructor</summary>
 		/// <returns>Execution algorithm time in milliseconds</returns>
         public decimal GetExecutionTime()
@@ -68,8 +73,7 @@ namespace Algorithms.models.Algorithms.models
 
             return;
         }
-            
-        
+             
 		/// <summary>String information representation</summary>
 		/// <returns>String of fields</returns>
         public override string ToString()

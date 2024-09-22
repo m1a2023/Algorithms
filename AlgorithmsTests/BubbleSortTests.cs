@@ -18,13 +18,13 @@ namespace AlgorithmsTests
         public void ExecutionTest()
         {
             BubbleSort<Int64> bubbleSort = new BubbleSort<Int64>();
-            List<Int64> list = generator.GenerateList(10);
+            List<Int64> list = generator.GenerateList(10, 0, 100);
 
             bubbleSort.Execute(list);
+            Console.WriteLine(String.Join(", ", list));
+            //Console.WriteLine(bubbleSort.GetExecutionTime(list));
 
-            Console.WriteLine(bubbleSort.GetExecutionTime(list));
-
-            Console.WriteLine(new BubbleSort<long>([90, 11, 39, 0]).ToString());
+            //Console.WriteLine(new BubbleSort<long>([90, 11, 39, 0]).ToString());
         }
     }
 }

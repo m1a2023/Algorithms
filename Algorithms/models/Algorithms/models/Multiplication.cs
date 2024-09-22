@@ -26,6 +26,12 @@ namespace Algorithms.models.Algorithms.models
             this.Data = Data;
             Result = Multiplicate(this.Data);
         }
+            
+        public T GetResult()
+        {
+			if (Result == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
+            return Result; 
+        }
 
         /// <summary>General method that executes algorithm</summary>
         /// <param name="data">Value collection, implemented via ICollection</param>

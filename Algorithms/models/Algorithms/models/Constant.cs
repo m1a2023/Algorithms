@@ -29,6 +29,8 @@ namespace Algorithms.models.Algorithms.models
 			Result = T.One;
 		}
 
+		public T GetResult() => Result;
+
 		/// <summary>Additional method for extended constructor</summary>
 		/// <returns>Execution algorithm time in milliseconds</returns>
 		public decimal GetExecutionTime()

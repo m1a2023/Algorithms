@@ -31,6 +31,12 @@ namespace Algorithms.models.Algorithms.models
 				Result = Calculate(this.Data);
 			}
 
+			public T GetResult()
+			{
+				if (Result == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
+				return Result;
+			}
+
 			/// <summary>General method that executes algorithm</summary>
 			/// <param name="data">Value collection, implemented via ICollection</param>
 			public override void Execute(IList<T> data)
@@ -91,6 +97,12 @@ namespace Algorithms.models.Algorithms.models
 				Result = Calculate(this.Data);
 			}
 
+			public T GetResult()
+			{
+				if (Result == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
+				return Result;
+			}
+			
 			/// <summary>General method that executes algorithm</summary>
 			/// <param name="data">Value collection, implemented via ICollection</param>
             public override void Execute(IList<T> data)

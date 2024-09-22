@@ -33,6 +33,12 @@ namespace Algorithms.models.Algorithms.models
 				Result = Pow(this.Base, this.Exponent);
 			}
 
+			public T GetResult()
+			{
+				if (Result == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
+				return Result;	
+			}
+        	
 			public override void Execute(IList<T> data)
 			{
 				Pow(data[0], data[1]);
@@ -97,7 +103,13 @@ namespace Algorithms.models.Algorithms.models
 				Result = Pow(this.Base, this.Exponent);
             }
 			
-            public override void Execute(IList<T> data)
+			public T GetResult()
+			{
+				if (Result == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
+				return Result;	
+			}
+          
+			public override void Execute(IList<T> data)
 			{
 				if (data.Count != 2)
 					throw new ArgumentException("Invalid elements quantity exception");
@@ -166,7 +178,13 @@ namespace Algorithms.models.Algorithms.models
 				Result = Pow(this.Base, this.Exponent);
 			}
 
-            public override void Execute(IList<T> data)
+			public T GetResult()
+			{
+				if (Result == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
+				return Result;	
+			}
+            
+			public override void Execute(IList<T> data)
             {
 				if (data.Count != 2)
 					throw new ArgumentException("Invalid elements quantity exception");
@@ -244,7 +262,13 @@ namespace Algorithms.models.Algorithms.models
 				Result = Pow(this.Base, this.Exponent);
 			}
 
-            public override void Execute(IList<T> data)
+			public T GetResult()
+			{
+				if (Result == default) throw new ArgumentException("Field Result has not any value. Use Extended constructor");
+				return Result;	
+			}
+            
+			public override void Execute(IList<T> data)
             {
 				if (data.Count != 2)
 					throw new ArgumentException("Invalid elements quantity exception");
