@@ -12,7 +12,7 @@ namespace AlgorithmsTests
     [TestClass]
     public class MultiplicationTests
     {
-        private readonly Multiplication<Int64> mulInt = new();
+        private readonly Multiplication<BigInteger> mulInt = new();
         private readonly Multiplication<long> mulDouble = new();
         
         private readonly StructGenerator structGenerator = new StructGenerator();
@@ -23,13 +23,13 @@ namespace AlgorithmsTests
             /**
              *  Test integer array
              */
-            Int64[] array = structGenerator.GenerateArray(1_000_000);
-
+            BigInteger[] array = new BigInteger[] { 999999999999, 10000000000000, 1000000000000, 2034987847, 278452895827094857, 2938457928759237, 02937459248290745, 923485729083759832, 928347592873590274, 98472983752389, 283974582705};
+            long[] arr = structGenerator.GenerateArray(10, 0, 100);
             /**
              *  
              */
         
-            Console.WriteLine("Execution " + array.GetType().Name + " array time: " + mulInt.GetExecutionTime(array));
+            Console.WriteLine(new Multiplication<long>(arr).ToString()); 
         }
 
         [TestMethod]

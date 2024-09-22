@@ -8,15 +8,13 @@ using System.Threading.Tasks;
 
 namespace Algorithms.models.Algorithms.models
 {
-	/// <summary>
-	/// 
-	/// </summary>
+	/// <summary>Implementation of pow</summary>
 	public static class Pow
 	{
 		/// <summary>Implementation of simple pow algorithm</summary>
 		/// <typeparam name="T">Supports Integer types between short and Int64</typeparam>
 		public class Simple<T> : Algorithm<T> 
-			where T : INumber<T>
+			where T : INumber<T>, IBinaryInteger<T>
 		{
 			protected T Base { get; private set; }
 			protected T Exponent { get; private set; }
@@ -170,7 +168,7 @@ namespace Algorithms.models.Algorithms.models
 
             public override void Execute(IList<T> data)
             {
-				if (data.Count != 2) 
+				if (data.Count != 2)
 					throw new ArgumentException("Invalid elements quantity exception");
 				
 				Pow(data[0], data[1]);
@@ -248,6 +246,9 @@ namespace Algorithms.models.Algorithms.models
 
             public override void Execute(IList<T> data)
             {
+				if (data.Count != 2)
+					throw new ArgumentException("Invalid elements quantity exception");
+				
 				Pow(data[0], data[1]);
             }
 				
@@ -298,5 +299,3 @@ namespace Algorithms.models.Algorithms.models
         }
 	}
 }
-
-

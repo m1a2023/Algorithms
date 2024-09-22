@@ -15,7 +15,11 @@ namespace Algorithms.models.Algorithms.models
 		protected IList<T> Data { get; private set; }
 		protected IList<T> SortedData { get; private set; }
 
+		/// <summary>Default constructor</summary>
 		public TimSort() { }
+
+		/// <summary>Extended constructor</summary>
+		/// <param name="Data"></param>
 		public TimSort(IList<T> Data)
 		{
 			this.Data = Data;
@@ -31,12 +35,12 @@ namespace Algorithms.models.Algorithms.models
 		/// <returns>Variable the same type as argument</returns>
 		public override void Execute(IList<T> data)
 		{
-			Timsort(data, data.Count);
+			Sort(data, data.Count);
 		}
 
 		private const int MIN_MERGE = 32;
 		
-		private void Timsort(IList<T> arr, int exponent)
+		private void Sort(IList<T> arr, int exponent)
 		{
 			int minRun = GetMinRunLength(MIN_MERGE);
 

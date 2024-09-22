@@ -13,10 +13,28 @@ namespace Algorithms.models.Algorithms.models
     public class Multiplication<T> : Algorithm<T>
         where T : INumber<T>
     {
+        protected IList<T> Data { get; private set; }        
+        protected T Result { get; private set; }
+
+        /// <summary>Default constructor</summary>
+        public Multiplication() { } 
+
+		/// <summary>Extended constructor</summary>
+		/// <param name="Data"></param>
+        public Multiplication(IList<T> Data)
+        {
+            this.Data = Data;
+            Result = Multiplicate(this.Data);
+        }
+
         /// <summary>General method that executes algorithm</summary>
         /// <param name="data">Value collection, implemented via ICollection</param>
-        /// <returns>Variable the same type as argument</returns>
         public override void Execute(IList<T> data)
+        {
+            Multiplicate(data);
+        }
+       
+        private T Multiplicate(IList<T> data)
         {
             T tmp = T.One;
 
@@ -25,7 +43,31 @@ namespace Algorithms.models.Algorithms.models
                 tmp *= item;
             }
 
-            return;
+            return tmp; 
+        }
+		
+        /// <summary>Additional method for extended constructor</summary>
+		/// <returns>Execution algorithm time in milliseconds</returns>
+        public decimal GetExecutionTime()
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew(); 
+
+            Execute(Data);
+
+            stopwatch.Stop();   
+
+            return new decimal (stopwatch.Elapsed.TotalMilliseconds);
+        }
+        
+        
+		/// <summary>String information representation</summary>
+		/// <returns>String of fields</returns>
+        public override string ToString()
+        {
+            string data = String.Join(", ", Data);
+            return $"Original collection: {data} [{Data.GetType()}]\n" +
+                $"Result: {Result} [{Result.GetType()}]\n" +
+                $"Execution time: {GetExecutionTime()}";
         }
     }
 }

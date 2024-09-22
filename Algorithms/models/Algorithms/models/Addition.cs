@@ -28,7 +28,6 @@ namespace Algorithms.models.Algorithms.models
             Result = Add(this.Data);
         }
         
-        
         /// <summary>General method that executes algorithm</summary>
         /// <param name="data">Value collection, implemented via ICollection</param>
         /// <returns>Variable the same type as the argument</returns>

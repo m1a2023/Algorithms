@@ -11,14 +11,15 @@ namespace AlgorithmsTests
 	[TestClass]
 	public class PolynomialPTests
 	{
-		PolynomialP.Naive<long> naive = new PolynomialP.Naive<long>();
 		StructGenerator generator = new StructGenerator();	
 
 		[TestMethod]
 		public void ExecuteTest()
 		{
-			var arr = new int[] { 2, 5 };
 
+			Console.WriteLine(new PolynomialP.Naive<decimal> ([190, 10, 10, 22, 100]));
+
+			Console.WriteLine(new PolynomialP.Horner<decimal> ([190, 10, 10, 22, 100]));
 		}
 	}
 }
