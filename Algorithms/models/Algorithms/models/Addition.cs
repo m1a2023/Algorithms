@@ -8,19 +8,33 @@ using System.Threading.Tasks;
 
 namespace Algorithms.models.Algorithms.models
 {
-    /// <summary>
-    /// Implementation sum element algorithm
-    /// </summary>
+    /// <summary>Implementation sum element algorithm</summary>
     /// <typeparam name="T">Inner data type</typeparam>
-    public class Addition<T> : IAlgorithm<T>
+    public class Addition<T> : AProcessingAlgorithm<T>
         where T : INumber<T>
     {
-        /// <summary>
-        /// General method that executes algorithm 
-        /// </summary>
-        /// <param name="data"></param>
+
+        /// <summary>Default constructor</summary>
+        public Addition() { } 
+
+		/// <summary>Extended constructor</summary>
+		/// <param name="Data"></param>
+        public Addition(IList<T> Data) : base(Data) { }
+        
+        /// <summary>General method that executes algorithm</summary>
+        /// <param name="data">Value collection, implemented via ICollection</param>
         /// <returns>Variable the same type as the argument</returns>
-        public T Execute(ICollection<T> data)
+        public override void Execute(IList<T> data)
+        {
+            Add(data);
+        }
+
+        public override T Process(IList<T> Data)
+        {
+            return Add(Data);
+        }
+
+        private T Add(IList<T> data) 
         {
             T tmp = T.Zero;
 
@@ -28,29 +42,8 @@ namespace Algorithms.models.Algorithms.models
             {
                 tmp += item;
             }
-
+            
             return tmp;
         }
-
-        /// <summary>
-        /// Starts the stopwatch, executes algorithm and stops stopwatch
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns>Execution algorithm time in milliseconds</returns>
-        public decimal GetExecutionTime(ICollection<T> data)
-        {
-            Stopwatch executionTime = Stopwatch.StartNew();
-
-            Execute(data);
-
-            executionTime.Stop();
-
-            return new decimal(executionTime.Elapsed.TotalMilliseconds);
-        }
-
-        public T Execute(T[] data) => Execute((ICollection<T>)data);
-        public T Execute(List<T> data) => Execute((ICollection<T>)data);
-        public decimal GetExecutionTime(T[] data) => GetExecutionTime((ICollection<T>)data);
-        public decimal GetExecutionTime(List<T> data) => GetExecutionTime((ICollection<T>)data);
     }
 }

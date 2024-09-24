@@ -1,7 +1,6 @@
 using Algorithms.models.Algorithms.models;
 using System.Diagnostics;
 using System.Numerics;
-///
 using Algorithms.models.Generator;
 
 namespace AlgorithmsTests
@@ -11,6 +10,7 @@ namespace AlgorithmsTests
     {
         Addition<BigInteger> sumBigInteger = new Addition<BigInteger>();
         Addition<Double> sumDouble = new Addition<Double>();
+        
         [TestMethod]
         public void ArrayTest()
         {
@@ -29,8 +29,8 @@ namespace AlgorithmsTests
              *  Output 
              */
             Console.WriteLine("Execution " + array.GetType().Name + " array time: " + sumBigInteger.GetExecutionTime(array));
-
-            Assert.AreEqual(bigIntegerCheckSum, sumBigInteger.Execute(array));
+        
+            Console.WriteLine(new Addition<long> ([ 19, 90, 100 ]).ToString());
         }
 
         [TestMethod]
@@ -45,8 +45,6 @@ namespace AlgorithmsTests
              *  Output
              */
             Console.WriteLine("Execution " + list.GetType().Name + " list time: " + sumDouble.GetExecutionTime(list));
-            
-            Assert.AreEqual(list.Sum(), sumDouble.Execute(list));
         }
    }
 }

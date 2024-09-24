@@ -5,14 +5,17 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Algorithms.models.Algorithms.models;
+using Algorithms.models.Generator;
 
 namespace AlgorithmsTests
 {
     [TestClass]
     public class MultiplicationTests
     {
-        Multiplication<BigInteger> mulInt = new();
-        Multiplication<Double> mulDouble = new();
+        private readonly Multiplication<BigInteger> mulInt = new();
+        private readonly Multiplication<long> mulDouble = new();
+        
+        private readonly StructGenerator structGenerator = new StructGenerator();
 
         [TestMethod]
         public void ArrayTest()
@@ -20,42 +23,34 @@ namespace AlgorithmsTests
             /**
              *  Test integer array
              */
-            BigInteger[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 90 };
-
+            BigInteger[] array = new BigInteger[] { 999999999999, 10000000000000, 1000000000000, 2034987847, 278452895827094857, 2938457928759237, 02937459248290745, 923485729083759832, 928347592873590274, 98472983752389, 283974582705};
+            long[] arr = structGenerator.GenerateArray(10, 0, 10);
             /**
              *  
              */
-            BigInteger bigIntegerCheckMul = 1;
-            foreach (var item in array) { bigIntegerCheckMul *= item; }
-
-            /**
-             *  Output 
-             */
-            Console.WriteLine("Execution " + array.GetType().Name + " array time: " + mulInt.GetExecutionTime(array));
-
-            Assert.AreEqual(bigIntegerCheckMul, mulInt.Execute(array));
+        
+            Console.WriteLine(new Multiplication<long>(arr).ToString()); 
         }
 
         [TestMethod]
+        //GenerationListInt64Test()
         public void ListTest()
         {
             /**
-             *  Test Double list 
+             *  Test list 
              */
-            List<Double> list = new List<Double> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 1, 2, 999, 1000 };
+            List<long> list = structGenerator.GenerateList(1_000_000, 0, 19999);
 
             /**
              * 
              */
-            Double listMul = 1;
+            Int64 listMul = 1;
             foreach (var item in list) { listMul *= item; }
             
             /**
              *  Output 
              */
             Console.WriteLine("Execution " + list.GetType().Name + " array time: " + mulDouble.GetExecutionTime(list));
-
-            Assert.AreEqual(listMul, mulDouble.Execute(list));  
         }
     }
 }

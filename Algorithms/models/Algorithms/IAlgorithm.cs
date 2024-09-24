@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Algorithms.models.Algorithms
 {
-    /// <summary>
-    /// Represents algorithm and it's methods
-    /// </summary>
+    // ! DEPRICATED
+    //  DO NOT USE! 
+    /// <summary>Represents algorithm and it's methods</summary>
     /// <typeparam name="T"></typeparam>
-    internal interface IAlgorithm<T>
+    public interface IAlgorithm<T>
         where T : INumber<T>
     {
         decimal GetExecutionTime(ICollection<T> data);
-        T Execute(ICollection<T> data);
+        void Execute(ICollection<T> data);
     }
 }

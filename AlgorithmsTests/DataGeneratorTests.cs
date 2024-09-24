@@ -10,16 +10,18 @@ namespace AlgorithmsTests
     [TestClass]
     public class DataGeneratorTests
     {
-        [TestMethod]
-        public void ArrayGeneration()
-        {
+        DataGenerator dataGenerator = new DataGenerator();
 
+        [TestMethod]
+        public void GetRandomInt64Tests()
+        {
+            Console.WriteLine(dataGenerator.GetRandomInt64());              
         }
 
         [TestMethod]
         public void ListGeneration()
         {
-
+            Console.WriteLine(dataGenerator.GetRandomDouble(10));              
         }
     }
 }

@@ -6,43 +6,28 @@ using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
-using Algorithms.models.Algorithms;
 
 namespace Algorithms.models.Algorithms.models
 {
-    /// <summary>
-    /// Implementation Constant function algorithm
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class Constant<T> : IAlgorithm<T>
-        where T : INumber<T>
-    {
-        /// <summary>
-        /// General methond that executes algorithm
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns>Variable the same type as the argument</returns>
-        public T Execute(ICollection<T> data) { T val = T.One; return val; }
+	/// <summary>Implementation Constant function algorithm</summary>
+	/// <typeparam name="T">Inner data type</typeparam>
+	public class Constant<T> : AProcessingAlgorithm<T>
+		where T : INumber<T>
+	{
+		/// <summary>Default constructor</summary>
+		public Constant() { } 
+        
+		/// <summary>Extended constructor</summary>
+        /// <param name="Data"></param>
+		public Constant(IList<T> Data) : base(Data) { }
 
-        /// <summary>
-        /// Starts the stopwatch, executes algorithm and stops stopwatch
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns>Execution algorithm time in milliseconds</returns>
-        public decimal GetExecutionTime(ICollection<T> data)
+        public override T Process(IList<T> Data)
         {
-            Stopwatch executionTime = Stopwatch.StartNew();
-
-            Execute(data);
-
-            executionTime.Stop();
-
-            return new decimal(executionTime.Elapsed.TotalMilliseconds);
+			return T.CreateChecked(1);
         }
 
-        public T Execute(T[] data) => Execute((ICollection<T>)data);
-        public T Execute(List<T> data) => Execute((ICollection<T>)data);
-        public decimal GetExecutionTime(T[] data) => GetExecutionTime((ICollection<T>)data);
-        public decimal GetExecutionTime(List<T> data) => GetExecutionTime((ICollection<T>)data);
+        /// <summary>general methond that executes algorithm</summary>
+        /// <param name="data">value collection, implemented via icollection</param>
+        public override void Execute(IList<T> data) { return; }
     }
 }
