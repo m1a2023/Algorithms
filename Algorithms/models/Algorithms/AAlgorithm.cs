@@ -19,7 +19,7 @@ namespace Algorithms.models.Algorithms
         /// <summary>Starts the stopwatch, executes algorithm and stops stopwatch</summary>
         /// <param name="data">Value collection, implemented via ICollection</param>
         /// <returns>Execution algorithm time in milliseconds</returns>
-        public decimal GetExecutionTime(IList<T> data)
+        public double GetExecutionTime(IList<T> data)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
@@ -27,7 +27,7 @@ namespace Algorithms.models.Algorithms
 
             stopwatch.Stop();
 
-            return new decimal(stopwatch.Elapsed.TotalMilliseconds);
+            return stopwatch.Elapsed.TotalMilliseconds;
         }
     }
 }

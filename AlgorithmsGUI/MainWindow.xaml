@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AlgorithmsGUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:oxy="http://oxyplot.org/wpf"
+        Title="Algorithm Performance" Height="450" Width="800">
     <Grid>
-
+            <oxy:PlotView  Model="{Binding PlotModel}" />
     </Grid>
 </Window>
+

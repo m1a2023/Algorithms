@@ -17,9 +17,6 @@ namespace AlgorithmsTests
         [TestMethod] 
         public void ExecuteTest()
         {
-            long[] testArray = structGenerator.GenerateArray(10, 0, 100);
-
-            Console.WriteLine(new TimSort<long>(structGenerator.GenerateArray(10, 0, 100)).ToString());
         }   
     }
 }

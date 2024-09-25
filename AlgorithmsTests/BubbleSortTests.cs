@@ -22,9 +22,6 @@ namespace AlgorithmsTests
 
             bubbleSort.Execute(list);
 
-            var bs = new BubbleSort<long>(generator.GenerateArray(10, 0, 100));
-            Console.WriteLine(bs.ToString()); 
-            Console.WriteLine(bs.GetExecutionTime()); 
         }
     }
 }

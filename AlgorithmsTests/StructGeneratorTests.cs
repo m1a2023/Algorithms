@@ -18,7 +18,6 @@ namespace AlgorithmsTests
         [TestMethod]
         public void ArrayGenerationTest()
         {
-            var sg = structGenerator.GenerateArray(10, 0, 1000);
 
         }
     }

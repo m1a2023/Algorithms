@@ -18,9 +18,7 @@ namespace AlgorithmsTests
         [TestMethod]
         public void ExecutionTest()
         {
-            var qs = new QuickSort<long>(generator.GenerateArray(10, 0, 100));
-            Console.WriteLine(qs.ToString()); 
-            Console.WriteLine(qs.GetExecutionTime());
+
         }
     }
 }

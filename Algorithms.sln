@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Algorithms", "Algorithms\Al
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgorithmsTests", "AlgorithmsTests\AlgorithmsTests.csproj", "{3E68B80C-DC4B-4C69-807B-CEA0D2E0A40A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmsGUI", "AlgorithmsGUI\AlgorithmsGUI.csproj", "{958938C3-5AD7-40B0-AF27-ED3F53BCC60B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgorithmsGUI", "AlgorithmsGUI\AlgorithmsGUI.csproj", "{958938C3-5AD7-40B0-AF27-ED3F53BCC60B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -45,16 +45,11 @@ namespace Algorithms.models.Algorithms
 
 		/// <summary>Additional method for extended constructor</summary>
 		/// <returns>Execution algorithm time in milliseconds</returns>
-		public virtual decimal GetExecutionTime()
+		public virtual double GetExecutionTime()
 		{
-			Stopwatch stopwatch = Stopwatch.StartNew();	
-
-			Execute(Data);
-
-			stopwatch.Stop();
-
-			return new decimal(stopwatch.Elapsed.TotalMilliseconds);
+			return GetExecutionTime(Data);
 		}
+
 
 		/// <summary>String information representation</summary>
 		/// <returns>String of fields</returns>

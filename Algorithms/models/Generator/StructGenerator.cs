@@ -13,11 +13,30 @@ namespace Algorithms.models.Generator
 		private readonly DataGenerator dataGenerator = new DataGenerator(); 
 		
 		/// <summary>Generates array with selected values</summary>
+		/// <typeparam name="T">Inner data type</typeparam>
 		/// <param name="size">Size of array</param>
 		/// <param name="minValue">Min value that can be generated</param>
 		/// <param name="maxValue">Max value that can be generated</param>
 		/// <returns>Generated array</returns>
-		public Int64[] GenerateArray(Int64 size, Int64 minValue, Int64 maxValue) 
+		public IList<T> GenerateArray<T>(int size, Int64 minValue, Int64 maxValue) where T : INumber<T>
+		{
+			IList<T> arr = new T[size];
+			 
+			for (int i = 0; i < size; i++)
+			{
+				arr[i] = T.CreateChecked(dataGenerator.GetRandomUInt32());	
+			}
+
+			return arr;
+		}
+
+
+		/// <summary>Generates array with selected values</summary>
+		/// <param name="size">Size of array</param>
+		/// <param name="minValue">Min value that can be generated</param>
+		/// <param name="maxValue">Max value that can be generated</param>
+		/// <returns>Generated array</returns>
+		public Int64[] GenerateInt64Array(int size, Int64 minValue, Int64 maxValue) 
 		{
 			Int64[] arr = new Int64[size];
 			
@@ -32,9 +51,9 @@ namespace Algorithms.models.Generator
 		/// <summary>Generates array with limit value from 0 to Int64.MaxValue</summary>
 		/// <param name="size">Size of array</param>
 		/// <returns>Generated array</returns>
-		public Int64[] GenerateArray(Int64 size)
+		public Int64[] GenerateArray(int size)
 		{
-			return GenerateArray(size, 0, long.MaxValue);
+			return GenerateInt64Array(size, 0, long.MaxValue);
 		}
 		
 		/// <summary>Generates list with selected values</summary>
@@ -42,7 +61,7 @@ namespace Algorithms.models.Generator
 		/// <param name="minValue">Min value that can be generated</param>
 		/// <param name="maxValue">Max value that can be generated</param>
 		/// <returns>Generated list</returns>
-		public List<Int64> GenerateList(Int64 size, Int64 minValue, Int64 maxValue)
+		public List<Int64> GenerateList(int size, Int64 minValue, Int64 maxValue)
 		{
 			List<Int64> list = new List<Int64>();
 
@@ -57,7 +76,7 @@ namespace Algorithms.models.Generator
 		/// <summary>Generates list with limit value from 0 to Int64.MaxValue</summary>
 		/// <param name="size">Size of list</param>
 		/// <returns>Generated list</returns>
-		public List<Int64> GenerateList(Int64 size)
+		public List<Int64> GenerateList(int size)
 		{
 			return GenerateList(size, 0, long.MaxValue);
 		}

@@ -44,7 +44,7 @@ namespace Algorithms.models.Algorithms
         
 		/// <summary>Additional method for extended constructor</summary>
 		/// <returns>Execution algorithm time in milliseconds</returns>
-        public virtual decimal GetExecutionTime()
+        public virtual double GetExecutionTime()
         {
 			if (Data == null) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
 
@@ -57,7 +57,7 @@ namespace Algorithms.models.Algorithms
 			
 			stopwatch.Stop();
 
-			return new decimal (stopwatch.Elapsed.TotalMilliseconds);
+			return stopwatch.Elapsed.TotalMilliseconds;
         }
         
 		/// <summary>String information representation</summary>

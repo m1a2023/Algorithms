@@ -15,6 +15,14 @@ namespace Algorithms.models.Generator
         
         /// <summary>Returns a random integer that is within a specified range.</summary>
         /// <returns>Randomized long (64bit int) from 0 to Integer.MAX_VALUE</returns>
+        public Int32 GetRandomUInt32() { return random.Next();  }
+            
+        /// <summary>Returns a random integer that is within a specified range.</summary>
+        /// <returns>Randomized long (64bit int) from Int32.MinValue to Int32.MaxValue</returns>
+        public Int32 GetRandomInt32() { return random.Next(int.MinValue, int.MaxValue); }
+        
+        /// <summary>Returns a random integer that is within a specified range.</summary>
+        /// <returns>Randomized long (64bit int) from 0 to Integer.MAX_VALUE</returns>
         public Int64 GetRandomPositiveInt64() { return random.NextInt64(); }
             
         /// <summary>Returns a random integer that is within a specified range.</summary>

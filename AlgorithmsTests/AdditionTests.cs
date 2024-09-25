@@ -28,9 +28,7 @@ namespace AlgorithmsTests
             /**
              *  Output 
              */
-            Console.WriteLine("Execution " + array.GetType().Name + " array time: " + sumBigInteger.GetExecutionTime(array));
-        
-            Console.WriteLine(new Addition<long> ([ 19, 90, 100 ]).ToString());
+            Console.WriteLine("Execution " + array.GetType().Name + " array time: " + sumBigInteger.GetExecutionTime([10, 10, 10]));
         }
 
         [TestMethod]

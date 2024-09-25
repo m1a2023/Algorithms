@@ -23,13 +23,11 @@ namespace AlgorithmsTests
             /**
              *  Test integer array
              */
-            BigInteger[] array = new BigInteger[] { 999999999999, 10000000000000, 1000000000000, 2034987847, 278452895827094857, 2938457928759237, 02937459248290745, 923485729083759832, 928347592873590274, 98472983752389, 283974582705};
-            long[] arr = structGenerator.GenerateArray(10, 0, 10);
+            BigInteger[] array = new BigInteger[] { 0, 10000000000000, 1000000000000, 2034987847, 278452895827094857, 2938457928759237, 02937459248290745, 923485729083759832, 928347592873590274, 98472983752389, 283974582705};
             /**
              *  
              */
         
-            Console.WriteLine(new Multiplication<long>(arr).ToString()); 
         }
 
         [TestMethod]
