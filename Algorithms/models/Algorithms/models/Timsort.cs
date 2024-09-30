@@ -34,13 +34,11 @@ namespace Algorithms.models.Algorithms.models
 		{
 			int minRun = GetMinRunLength(MIN_MERGE);
 
-			// Sort individual subarrays of size MIN_MERGE
 			for (int i = 0; i < exponent; i += minRun)
 			{
 				InsertionSort(arr, i, Math.Min((i + MIN_MERGE - 1), (exponent - 1)));
 			}
 
-			// Merge subarrays
 			for (int size = minRun; size < exponent; size = 2 * size)
 			{
 				for (int left = 0; left < exponent; left += 2 * size)

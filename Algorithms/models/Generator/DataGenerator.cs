@@ -11,12 +11,16 @@ namespace Algorithms.models.Generator
     /// <summary>Implementation randomizer</summary>
     public class DataGenerator
     {
-        private readonly Random random = new Random();
+        private readonly Random random = new Random(Guid.NewGuid().GetHashCode());
         
         /// <summary>Returns a random integer that is within a specified range.</summary>
         /// <returns>Randomized long (64bit int) from 0 to Integer.MAX_VALUE</returns>
-        public Int32 GetRandomUInt32() { return random.Next();  }
+        public Int32 GetRandomUInt32(Int32 minValue, Int32 maxValue) { return random.Next(minValue, maxValue);  }
             
+        /// <summary>Returns a random integer that is within a specified range.</summary>
+        /// <returns>Randomized long (64bit int) from 0 to Integer.MAX_VALUE</returns>
+        public Int32 GetRandomUInt32() { return GetRandomUInt32(0, int.MaxValue / 2); }
+        
         /// <summary>Returns a random integer that is within a specified range.</summary>
         /// <returns>Randomized long (64bit int) from Int32.MinValue to Int32.MaxValue</returns>
         public Int32 GetRandomInt32() { return random.Next(int.MinValue, int.MaxValue); }

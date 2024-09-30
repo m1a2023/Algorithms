@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Algorithms.models.Matrix;
 
 namespace Algorithms.models.Generator
 {
@@ -18,13 +19,13 @@ namespace Algorithms.models.Generator
 		/// <param name="minValue">Min value that can be generated</param>
 		/// <param name="maxValue">Max value that can be generated</param>
 		/// <returns>Generated array</returns>
-		public IList<T> GenerateArray<T>(int size, Int64 minValue, Int64 maxValue) where T : INumber<T>
+		public IList<T> GenerateArray<T>(int size, Int32 minValue, Int32 maxValue) where T : INumber<T>
 		{
 			IList<T> arr = new T[size];
 			 
 			for (int i = 0; i < size; i++)
 			{
-				arr[i] = T.CreateChecked(dataGenerator.GetRandomUInt32());	
+				arr[i] = T.CreateChecked(dataGenerator.GetRandomInt64(minValue, maxValue));	
 			}
 
 			return arr;
@@ -81,5 +82,34 @@ namespace Algorithms.models.Generator
 			return GenerateList(size, 0, long.MaxValue);
 		}
 		
+		/// <summary>Generate matrix with limit value</summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="size">Matrix dimension</param>
+		/// <param name="minValue">Min value</param>
+		/// <param name="maxValue">Max value</param>
+		/// <returns></returns>
+		public Matrix<T> GenerateMatrix<T>(int size, Int32 minValue, Int32 maxValue) where T : INumber<T>
+		{
+			Matrix<T> matrix = new Matrix<T>(size, size);
+
+			for (int i = 0; i < size; i++)
+			{
+				for (int j = 0; j < size; j++)
+				{
+					matrix[i, j] = T.CreateChecked(dataGenerator.GetRandomInt64(minValue, maxValue));
+				}
+			}
+
+			return matrix;
+		}
+
+		/// <summary>Generates matrix with limit from 0 to 1000</summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="size"></param>
+		/// <returns></returns>
+		public Matrix<T> GenerateMatrix<T>(int size) where T : INumber<T>
+		{
+			return GenerateMatrix<T>(size, 0, 1000);
+		}
 	}
 }

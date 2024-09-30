@@ -52,7 +52,7 @@ namespace Algorithms.models.Algorithms.models
 			}
         }   
 		public class Horner<T> : AProcessingAlgorithm<T>
-			where T : INumber<T>
+			where T : INumber<T>, IFloatingPoint<T>
 		{
 			/// <summary>Default constructor</summary>
 			public Horner() { }

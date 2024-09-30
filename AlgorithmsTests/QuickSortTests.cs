@@ -18,7 +18,9 @@ namespace AlgorithmsTests
         [TestMethod]
         public void ExecutionTest()
         {
+            var _qs = new QuickSort<int>(generator.GenerateArray<int>(1_000_000, 0, 1000));
 
+            Console.WriteLine(_qs.ToString());
         }
     }
 }

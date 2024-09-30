@@ -17,6 +17,8 @@ namespace AlgorithmsTests
         [TestMethod] 
         public void ExecuteTest()
         {
+            Console.WriteLine(new TimSort<int> (new StructGenerator().GenerateArray<int>(1, 0, 1000000)).ToString());
+            Console.WriteLine(new TimSort<int> (new StructGenerator().GenerateArray<int>(1_000_000, 0, 1000000)).ToString());
         }   
     }
 }

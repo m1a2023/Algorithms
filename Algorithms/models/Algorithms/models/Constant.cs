@@ -28,6 +28,6 @@ namespace Algorithms.models.Algorithms.models
 
         /// <summary>general methond that executes algorithm</summary>
         /// <param name="data">value collection, implemented via icollection</param>
-        public override void Execute(IList<T> data) { return; }
+        public override void Execute(IList<T> data) { Process(data); }
     }
 }

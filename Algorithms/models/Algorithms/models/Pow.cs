@@ -23,6 +23,9 @@ namespace Algorithms.models.Algorithms.models
 			/// <param name="Data"></param>
 			public Simple(IList<T> Data) : base(Data) { }
 			
+			/// <summary>General method that executes algorithm</summary>
+			/// <param name="data"></param>
+			/// <exception cref="ArgumentException"></exception>
 			public override void Execute(IList<T> data)
 			{
 				if (data.Count != 2)
@@ -62,6 +65,9 @@ namespace Algorithms.models.Algorithms.models
 			/// <param name="Exponent"></param>
 			public Recursive(IList<T> Data) : base(Data) { }
 		  
+			/// <summary>General method that executes algorithm</summary>
+			/// <param name="data"></param>
+			/// <exception cref="ArgumentException"></exception>
 			public override void Execute(IList<T> data)
 			{
 				if (data.Count != 2)
@@ -104,6 +110,9 @@ namespace Algorithms.models.Algorithms.models
 			/// <param name="Exponent"></param>
 			public Quick(IList<T> Data) : base(Data) { }
 			
+			/// <summary>General method that executes algorithm</summary>
+			/// <param name="data"></param>
+			/// <exception cref="ArgumentException"></exception>
 			public override void Execute(IList<T> data)
 			{
 				if (data.Count != 2)
@@ -154,6 +163,9 @@ namespace Algorithms.models.Algorithms.models
 			/// <param name="Exponent"></param>
 			public ClassicQuick(IList<T> Data) : base(Data) { }
 			
+			/// <summary>General method that executes algorithm</summary>
+			/// <param name="data"></param>
+			/// <exception cref="ArgumentException"></exception>
 			public override void Execute(IList<T> data)
 			{
 				if (data.Count != 2)

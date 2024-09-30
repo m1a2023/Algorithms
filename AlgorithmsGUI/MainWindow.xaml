@@ -1,14 +1,48 @@
 ﻿<Window x:Class="AlgorithmsGUI.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AlgorithmsGUI"
-        mc:Ignorable="d"
-        xmlns:oxy="http://oxyplot.org/wpf"
-        Title="Algorithm Performance" Height="450" Width="800">
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:AlgorithmsGUI"
+		mc:Ignorable="d"
+		xmlns:oxy="http://oxyplot.org/wpf"
+		Title="Algorithm Performance" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ComboBox x:Name="plotSelection" 
+                  Grid.Row="0" 
+                  Margin="10,10,0,10" 
+                  Width="200" 
+                  HorizontalAlignment="Left"
+                  SelectionChanged="OnSelectionChanged">
+            <ComboBoxItem Content="Addition" />
+            <ComboBoxItem Content="Bubble sort" />
+            <ComboBoxItem Content="Bucket sort" />
+            <ComboBoxItem Content="Constant" />
+            <ComboBoxItem Content="Insertion sort" />
+            <ComboBoxItem Content="Multiplication" />
+            <ComboBoxItem Content="Polynomial naive" />
+            <ComboBoxItem Content="Polynomial horner" />
+            <ComboBoxItem Content="Pow simple" />
+            <ComboBoxItem Content="Pow recursive" />
+            <ComboBoxItem Content="Pow quick" />
+            <ComboBoxItem Content="Pow classic quick" />
+            <ComboBoxItem Content="Quick sort" />
+            <ComboBoxItem Content="Tim sort" />
+            <ComboBoxItem Content="Matrix multiplication" />
+        </ComboBox>
+
+        <ContentControl Grid.Row="1" Margin="10" x:Name="PlotContent">
             <oxy:PlotView  Model="{Binding PlotModel}" />
+        </ContentControl>
+        
+        <TextBox HorizontalAlignment="Left" Margin="240,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120" Height="22"/>
+        
+        <TextBox HorizontalAlignment="Left" Margin="400,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120" Height="22"/>
     </Grid>
 </Window>
 
