@@ -11,7 +11,7 @@ namespace Algorithms.models.Generator
     /// <summary>Implementation randomizer</summary>
     public class DataGenerator
     {
-        private readonly Random random = new Random(Guid.NewGuid().GetHashCode());
+        private readonly Random random = new Random();
         
         /// <summary>Returns a random integer that is within a specified range.</summary>
         /// <returns>Randomized long (64bit int) from 0 to Integer.MAX_VALUE</returns>

@@ -14,21 +14,10 @@ namespace AlgorithmsTests
         [TestMethod]
         public void ArrayTest()
         {
-            /**
-             *  Test integer array
-             */
-            BigInteger[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 90 };
+            Addition<int> a = new Addition<int>();
 
-            /**
-             *  Calculating elements sum
-             */
-            BigInteger bigIntegerCheckSum = 0, Zero = 0;
-            foreach (var item in array) { bigIntegerCheckSum += item; }
-
-            /**
-             *  Output 
-             */
-            Console.WriteLine("Execution " + array.GetType().Name + " array time: " + sumBigInteger.GetExecutionTime([10, 10, 10]));
+            Console.WriteLine(a.GetExecutionTime());
+            Console.WriteLine(a.ToString());
         }
 
         [TestMethod]

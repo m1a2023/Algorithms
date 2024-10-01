@@ -13,136 +13,155 @@ namespace Algorithms.models.Algorithms.models
 	{
 		/// <summary>Implementation of simple pow algorithm</summary>
 		/// <typeparam name="T">Supports Integer types between short and Int64</typeparam>
-		public class Simple<T> : AProcessingAlgorithm<T>
+		public class Simple<T> : APow<T>
 			where T : INumber<T>, IBinaryInteger<T>
 		{
 			/// <summary>Default constructor</summary>
 			public Simple() { }
 
 			/// <summary>Extended constructor</summary>
-			/// <param name="Data"></param>
-			public Simple(IList<T> Data) : base(Data) { }
-			
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			public Simple(T factor, T exponent) : base(factor, exponent) { Execute(); }
+
 			/// <summary>General method that executes algorithm</summary>
-			/// <param name="data"></param>
-			/// <exception cref="ArgumentException"></exception>
-			public override void Execute(IList<T> data)
-			{
-				if (data.Count != 2)
-					throw new ArgumentException("There must collection with two values");
-				Pow(data);
-			}
+			public override void Execute() { Result = Process(Factor, Exponent); }
 
-			public override T Process(IList<T> Data)
-			{
-				return Pow(Data); 
-			}
+			/// <summary>General method that executes algorithm with provided parameters</summary>
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			public override void Execute(T factor, T exponent) { Process(factor, exponent); }
 
-			private T Pow(IList<T> data)
+			/// <summary>Processes the calculation of power</summary>
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			/// <returns>The result of the power calculation</returns>
+			public override T Process(T factor, T exponent) { return Pow(factor, exponent); }
+
+			/// <summary></summary>
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			/// <returns></returns>
+			public override T Pow(T factor, T exponent)
 			{
-				T factor = data[0], exponent = data[1];
-				T res = T.One;
-				
-				for (int i = 0; i < Convert.ToInt64(exponent); i++)
+				Steps = 0;
+				T result = T.One;
+
+				for (long i = 0; i < Convert.ToInt64(exponent); i++)
 				{
-					res *= factor;
-				}  
+					result *= factor;
+					Steps++;
+				}
 
-				return res;
+				return result;
 			}
 		}
-		
+
 		/// <summary>Implementation of recursive pow algorithm</summary>
 		/// <typeparam name="T">Supports Integer types between short and Int128</typeparam>
-		public class Recursive<T> :  AProcessingAlgorithm<T>
-			where T : INumber<T>
+		public class Recursive<T> : APow<T>
+			where T : INumber<T>, IBinaryInteger<T>
 		{
 			/// <summary>Default constructor</summary>
 			public Recursive() { }
 
 			/// <summary>Extended constructor</summary>
-			/// <param name="Base"></param>
-			/// <param name="Exponent"></param>
-			public Recursive(IList<T> Data) : base(Data) { }
-		  
-			/// <summary>General method that executes algorithm</summary>
-			/// <param name="data"></param>
-			/// <exception cref="ArgumentException"></exception>
-			public override void Execute(IList<T> data)
-			{
-				if (data.Count != 2)
-					throw new ArgumentException("Invalid elements quantity exception");
-				
-				Pow(data);
-			}
-			
-			public override T Process(IList<T> Data)
-			{
-				return Pow(Data);
-			}
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			public Recursive(T factor, T exponent) : base(factor, exponent) { Execute(); }
 
-			private T Pow(IList<T> data)
+			/// <summary>General method that executes algorithm</summary>
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			/// <exception cref="ArgumentException"></exception>
+			public override void Execute(T factor, T exponent) { Process(factor, exponent); }
+			
+			/// <summary>General method that executes algorithm, for extended constructor</summary>
+			public override void Execute() { Process(Factor, Exponent); }
+			
+			/// <summary></summary>
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			/// <returns></returns>
+			public override T Process(T factor, T exponent) { return Pow(factor, exponent); }
+
+			/// <summary></summary>
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			/// <returns></returns>
+			public override T Pow(T factor, T exponent)
 			{
-				T factor = data[0], exponent = data[1];
+				Steps++; 
 
 				if (exponent == T.Zero) return T.One;
 
-				T f = Pow([factor, exponent / T.CreateChecked(2)]);
-
+				T f = Pow(factor, exponent / T.CreateChecked(2));
+				
+				Steps++;
+				
 				if (exponent % T.CreateChecked(2) == T.One)
+				{ 	
+					Steps++;
 					return f * f * factor;
+				}	
 				else
+				{
+					Steps++;
 					return f * f;
+				}
 			}
 		}
 
 		/// <summary>Implementation of quick pow algorithm</summary>
 		/// <typeparam name="T"></typeparam>
-		public class Quick<T> : AProcessingAlgorithm<T>
-			where T : INumber<T>
-
+		public class Quick<T> : APow<T>
+			where T : INumber<T>, IBinaryInteger<T>
 		{
 			/// <summary>Default constructor</summary>
 			public Quick() { }
 
 			/// <summary>Extended constructor</summary>
-			/// <param name="Base"></param>
-			/// <param name="Exponent"></param>
-			public Quick(IList<T> Data) : base(Data) { }
-			
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			public Quick(T factor, T exponent) : base(factor, exponent) { Execute(); }
+
 			/// <summary>General method that executes algorithm</summary>
-			/// <param name="data"></param>
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
 			/// <exception cref="ArgumentException"></exception>
-			public override void Execute(IList<T> data)
-			{
-				if (data.Count != 2)
-					throw new ArgumentException("Invalid elements quantity exception");
-				
-				Pow(data);
-			}
+			public override void Execute(T factor, T exponent) { Process(factor, exponent); }
 
-			public override T Process(IList<T> Data)
-			{
-				return Pow(Data);
-			}
+			/// <summary>General method that executes algorithm, for extended constructor</summary>
+			public override void Execute() { Process(Factor, Exponent); }
 
-			private T Pow(IList<T> data)
-			{
-				T f, factor = data[0], exponent = data[1];
+			/// <summary></summary>
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			/// <returns></returns>
+			public override T Process(T factor, T exponent) { return Pow(factor, exponent); }
 
-				if (exponent % T.CreateChecked(2) == T.One)
-					f = factor;
-				else
-					f = T.One;
-				
+			/// <summary></summary>
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			/// <returns></returns>
+			public override T Pow(T factor, T exponent)
+			{
+				Steps++; 
+
+				T f = exponent % T.CreateChecked(2) == T.One ? factor : T.One;
+
 				while (exponent != T.Zero)
 				{
 					exponent /= T.CreateChecked(2);
-
 					factor *= factor;
 
-					if (exponent % T.CreateChecked(2) == T.One) 
-						f = f * factor;
+					Steps++;
+
+					if (exponent % T.CreateChecked(2) == T.One)
+					{
+						Steps++; 
+						f *= factor;
+					}
 				}
 
 				return f;
@@ -151,37 +170,39 @@ namespace Algorithms.models.Algorithms.models
 
 		/// <summary>Implementation of classick quick pow algorithm</summary>
 		/// <typeparam name="T"></typeparam>
-		public class ClassicQuick<T> : AProcessingAlgorithm<T>
-			where T : INumber<T>
+		public class ClassicQuick<T> : APow<T>
+			where T : INumber<T>, IBinaryInteger<T>
 		{
-			
 			/// <summary>Default constructor</summary>
 			public ClassicQuick() { }
 
 			/// <summary>Extended constructor</summary>
-			/// <param name="Base"></param>
-			/// <param name="Exponent"></param>
-			public ClassicQuick(IList<T> Data) : base(Data) { }
-			
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			public ClassicQuick(T factor, T exponent) : base(factor, exponent) { Execute(); }
+
 			/// <summary>General method that executes algorithm</summary>
-			/// <param name="data"></param>
-			/// <exception cref="ArgumentException"></exception>
-			public override void Execute(IList<T> data)
-			{
-				if (data.Count != 2)
-					throw new ArgumentException("Invalid elements quantity exception");
-				
-				Pow(data);
-			}
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			public override void Execute(T factor, T exponent) { Process(factor, exponent); }
 
-            public override T Process(IList<T> Data)
-            {
-				return Pow(Data);
-            }
+			/// <summary>General method that executes algorithm for extended constructor</summary>
+			public override void Execute() { Process(Factor, Exponent); }
 
-            private T Pow(IList<T> data)
+			/// <summary>Method that processes the power calculation</summary>
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			/// <returns>The result of raising the factor to the power of exponent</returns>
+			public override T Process(T factor, T exponent) { return Pow(factor, exponent); }
+
+			/// <summary>Power calculation using the classic quick method</summary>
+			/// <param name="factor"></param>
+			/// <param name="exponent"></param>
+			/// <returns></returns>
+			public override T Pow(T factor, T exponent)
 			{
-				T f = T.One, factor = data[0], exponent = data[1];
+				Steps++;
+				T result = T.One;
 
 				while (exponent != T.Zero)
 				{
@@ -189,15 +210,17 @@ namespace Algorithms.models.Algorithms.models
 					{
 						factor *= factor;
 						exponent /= T.CreateChecked(2);
+						Steps++; 
 					}
 					else
 					{
-						f = f * factor;
+						result *= factor;
 						exponent -= T.One;
+						Steps++;
 					}
 				}
 
-				return f;
+				return result;
 			}
 		}
 	}

@@ -39,6 +39,8 @@ namespace Algorithms.models.Algorithms.models
 
             foreach (T item in data)
             {
+                if (item == T.Zero) return T.Zero;
+                if (item == T.One) continue;
                 tmp *= item;
             }
 

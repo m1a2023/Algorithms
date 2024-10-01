@@ -26,9 +26,9 @@ namespace Algorithms.models.Algorithms.models
         /// <returns>Variable the same type as the argument</returns>
         public override void Execute(IList<T> data)
         {
-            Add(data);
+            Process(data);
         }
-
+            
         public override T Process(IList<T> Data)
         {
             return Add(Data);
@@ -40,6 +40,7 @@ namespace Algorithms.models.Algorithms.models
 
             foreach (T item in data)
             {
+                if (item == T.Zero) continue;
                 tmp += item;
             }
             

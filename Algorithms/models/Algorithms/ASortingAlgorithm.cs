@@ -29,19 +29,31 @@ namespace Algorithms.models.Algorithms
 
             Execute(SortedData);
         }
-
+        
+        /// <summary>Getter for Data</summary>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public virtual IList<T> GetData()
         {
 			if (Data == null) throw new ArgumentException("Field Data has not any value. Use Extended constructor");
             return SortedData;	
         }
-
+        
+        /// <summary>Getter of sorted data</summary>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public virtual IList<T> GetSortedData()
         {
 			if (SortedData == null) throw new ArgumentException("Field SortedData has not any value. Use Extended constructor");
             return SortedData;	
         }
-        
+            
+        /// <summary>Setter for Data</summary>
+        /// <param name="Data"></param>
+        public virtual void SetData(IList<T> Data)
+        {
+            this.Data = Data;
+        }
 		/// <summary>Additional method for extended constructor</summary>
 		/// <returns>Execution algorithm time in milliseconds</returns>
         public virtual double GetExecutionTime()

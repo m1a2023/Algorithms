@@ -29,7 +29,7 @@ namespace Algorithms.models.Algorithms.models
 
         public void Sort(IList<T> data)
         {
-            for (Int64 i = 0; i < data.Count; i++)
+            for (int i = 0; i < data.Count; i++)
             {
                 for (int j = 0; j < data.Count - 1; j++)
                     if (data[j] > data[j + 1])

@@ -20,7 +20,6 @@ namespace Algorithms.models.Algorithms
 			this.Data = Data ?? throw new ArgumentException();
 			Result = Process(this.Data);
 		}
-
 		public abstract T Process(IList<T> Data);
 
 		/// <summary>Getter for Data if exists</summary>
@@ -32,7 +31,11 @@ namespace Algorithms.models.Algorithms
 				throw new ArgumentException("Field Data has not any value. Use Extended constructor");
 			return Data; 
 		}
-
+		
+		/// <summary>Setter for Data</summary>
+		/// <param name="Data"></param>
+		public virtual void SetData(IList<T> Data) { this.Data = Data; }
+		
 		/// <summary>Getter for Result if exists</summary>
 		/// <returns></returns>
 		/// <exception cref="ArgumentException"></exception>
@@ -45,15 +48,11 @@ namespace Algorithms.models.Algorithms
 
 		/// <summary>Additional method for extended constructor</summary>
 		/// <returns>Execution algorithm time in milliseconds</returns>
-		public virtual double GetExecutionTime()
-		{
-			return GetExecutionTime(Data);
-		}
-
+		public virtual double GetExecutionTime() { return GetExecutionTime(Data); }
 
 		/// <summary>String information representation</summary>
 		/// <returns>String of fields</returns>
-		public virtual string ToString()
+		public virtual String ToString()
 		{
 			string data = String.Join(", ", Data);
 			return $"Original collection: {data} [{Data.GetType()}]\n" +

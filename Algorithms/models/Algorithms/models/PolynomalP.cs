@@ -31,7 +31,7 @@ namespace Algorithms.models.Algorithms.models
 				if (data.Count == 0)
 					throw new ArgumentException("Invalid elements quantity exception");
 				
-				Calculate(data);
+				Process(data);
 			}
 
             public override T Process(IList<T> Data)

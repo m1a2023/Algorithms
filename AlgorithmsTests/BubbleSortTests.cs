@@ -17,10 +17,15 @@ namespace AlgorithmsTests
         [TestMethod]
         public void ExecutionTest()
         {
-            BubbleSort<Int64> bubbleSort = new BubbleSort<Int64>();
-            List<Int64> list = generator.GenerateList(10, 0, 100);
-
-            bubbleSort.Execute(list);
+            Console.WriteLine(
+                    new BubbleSort<int>().GetExecutionTime(
+                            generator.GenerateArray<int>(20000, 1, 1000) 
+                        )
+                );
+            Console.WriteLine(
+                    new BubbleSort<int> (generator.GenerateArray<int>(20000, 1, 100)
+                    ).ToString() 
+                );
 
         }
     }
