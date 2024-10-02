@@ -32,6 +32,7 @@
             <ComboBoxItem Content="Pow quick" />
             <ComboBoxItem Content="Pow classic quick" />
             <ComboBoxItem Content="Quick sort" />
+            <ComboBoxItem Content="Stooge sort" />
             <ComboBoxItem Content="Tim sort" />
             <ComboBoxItem Content="Matrix multiplication" />
         </ComboBox>

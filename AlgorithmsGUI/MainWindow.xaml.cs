@@ -33,7 +33,7 @@ namespace AlgorithmsGUI
 		private void OnSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
 			var SelectedAlgorithm = (plotSelection.SelectedItem as System.Windows.Controls.ComboBoxItem)?.Content.ToString();
-			int size = 10000,  maxValue = 200;
+			int size = 250,  maxValue = 200;
 			
 			viewModel.SwitchAlgorithm(
 				SelectedAlgorithm, size, maxValue
