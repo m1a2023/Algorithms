@@ -91,24 +91,12 @@ namespace Algorithms.models.Algorithms.models
 			/// <returns></returns>
 			public override T Pow(T factor, T exponent)
 			{
-				Steps++; 
-
 				if (exponent == T.Zero) return T.One;
-
+				
 				T f = Pow(factor, exponent / T.CreateChecked(2));
 				
-				Steps++;
-				
-				if (exponent % T.CreateChecked(2) == T.One)
-				{ 	
-					Steps++;
-					return f * f * factor;
-				}	
-				else
-				{
-					Steps++;
-					return f * f;
-				}
+				if (exponent % T.CreateChecked(2) == T.One) { Steps++; return f * f * factor; }	
+				else { Steps++; return f * f; }
 			}
 		}
 
@@ -146,22 +134,17 @@ namespace Algorithms.models.Algorithms.models
 			/// <returns></returns>
 			public override T Pow(T factor, T exponent)
 			{
-				Steps++; 
-
 				T f = exponent % T.CreateChecked(2) == T.One ? factor : T.One;
 
 				while (exponent != T.Zero)
 				{
+					if (exponent % T.CreateChecked(2) == T.One) { f *= factor; Steps++; }
+					
 					exponent /= T.CreateChecked(2);
+
 					factor *= factor;
-
+					
 					Steps++;
-
-					if (exponent % T.CreateChecked(2) == T.One)
-					{
-						Steps++; 
-						f *= factor;
-					}
 				}
 
 				return f;
@@ -201,8 +184,8 @@ namespace Algorithms.models.Algorithms.models
 			/// <returns></returns>
 			public override T Pow(T factor, T exponent)
 			{
-				Steps++;
 				T result = T.One;
+				Steps++;
 
 				while (exponent != T.Zero)
 				{
@@ -210,14 +193,13 @@ namespace Algorithms.models.Algorithms.models
 					{
 						factor *= factor;
 						exponent /= T.CreateChecked(2);
-						Steps++; 
 					}
 					else
 					{
 						result *= factor;
 						exponent -= T.One;
-						Steps++;
 					}
+					Steps++;
 				}
 
 				return result;

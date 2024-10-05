@@ -18,6 +18,7 @@ using System;
 using Algorithms.models.Algorithms.models;
 using Algorithms.models.Generator;
 using AlgorithmsGUI.ViewModels.Algorithms;
+using OxyPlot.Axes;
 
 namespace AlgorithmsGUI
 {
@@ -33,10 +34,10 @@ namespace AlgorithmsGUI
 		private void OnSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
 			var SelectedAlgorithm = (plotSelection.SelectedItem as System.Windows.Controls.ComboBoxItem)?.Content.ToString();
-			int size = 250,  maxValue = 200;
+			int size = 10000,  maxValue = 10000;
 			
 			viewModel.SwitchAlgorithm(
-				SelectedAlgorithm, size, maxValue
+				SelectedAlgorithm, size, maxValue, 3
 			);
 		}	
 	}

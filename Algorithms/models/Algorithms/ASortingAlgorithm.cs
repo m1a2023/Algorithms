@@ -54,6 +54,13 @@ namespace Algorithms.models.Algorithms
         {
             this.Data = Data;
         }
+    
+        /// <summary>Additional execution method for extended constructor</summary>
+        public virtual void Execute()
+        {
+            Execute(Data);
+        } 
+
 		/// <summary>Additional method for extended constructor</summary>
 		/// <returns>Execution algorithm time in milliseconds</returns>
         public virtual double GetExecutionTime()

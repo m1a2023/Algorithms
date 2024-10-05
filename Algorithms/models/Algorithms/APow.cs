@@ -42,6 +42,7 @@ namespace Algorithms.models.Algorithms
 		{
 			SetFactor(Factor);
 			SetExponent(Exponent);
+			Result = GetResult();
 		}
 
 		/// <summary> Gets the current base value (Factor).  </summary>
@@ -71,7 +72,7 @@ namespace Algorithms.models.Algorithms
 		public abstract T Process(T factor, T exponent);
 
 		/// <summary> Returns the number of steps taken during the power calculation.  </summary> <returns>The number of steps performed.</returns>
-		public virtual long GetSteps() { return Steps; }
+		public virtual long GetSteps() { var tmp = Steps; Steps = 0; return tmp; }
 
 		/// <summary> Abstract method to execute the power calculation.  This should be implemented by derived classes to define how to perform the calculation without parameters.  </summary>
 		public abstract void Execute();
