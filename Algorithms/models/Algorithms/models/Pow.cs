@@ -138,7 +138,7 @@ namespace Algorithms.models.Algorithms.models
 
 				while (exponent != T.Zero)
 				{
-					if (exponent % T.CreateChecked(2) == T.One) { f *= factor; Steps++; }
+					if (exponent % T.CreateChecked(2) == T.One) { f *= factor; }
 					
 					exponent /= T.CreateChecked(2);
 

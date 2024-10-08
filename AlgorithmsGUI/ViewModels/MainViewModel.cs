@@ -185,14 +185,16 @@ namespace AlgorithmsGUI
 		/// <param name="n"></param>
 		/// <param name="maxValue"></param>
 		/// <param name="series"></param>
-		public async Task AddPoint<T>(APow<T> algo, long factor, long exponent, LineSeries series)
+		public async Task AddPoint<T>(APow<T> algo, long factor, long exponent, LineSeries series, LineSeries approximation)
 			where T : INumber<T>
 		{
+			var points = new List<(double, double)>();
+
 			await Task.Run(() => 
 			{
 				algo.SetData(T.CreateChecked(factor), T.CreateChecked(exponent));
 			});
-			
+
 			Application.Current.Dispatcher.Invoke(() =>
 			{
 				series.Points.Add(new DataPoint(exponent, algo.GetSteps()));
@@ -208,16 +210,30 @@ namespace AlgorithmsGUI
 			where T : INumber<T>
 		{
 			if (token.IsCancellationRequested) return;
-			PlotStart(xTitle: "Value", yTitle: "Steps");
-
+			PlotStart(xTitle: "Steps", yTitle: "Value");
+			
 			LineSeries series = new LineSeries { MarkerType = MarkerType.None, Color = OxyColor.FromRgb(0, 0, 0), };
+			LineSeries approximation = new LineSeries { MarkerType = MarkerType.None, Color = OxyColor.FromRgb(255, 0, 0), };
 			
 			for (int n = 0; n <= exponent; n++)
 			{
-				await AddPoint(algo, factor, n, series);
+				await AddPoint(algo, factor, n, series, approximation);
 			}
 
-			UpdatePlot(series);
+			if (series.Points.Count > 1)
+			{
+				var lastPoint = series.Points.Last();
+				approximation.Points.Add(new DataPoint(0, algo.GetSteps())); // Starting point
+
+
+				for (double i = 1; i <= exponent; i += 0.1) // More fine-grained points for smooth curve
+				{
+					double yApprox = Math.Exp(Math.Log(series.Points.Last().Y) * (i / exponent)); // Exponential approximation
+					approximation.Points.Add(new DataPoint(i, yApprox));
+				}
+			}
+
+			UpdatePlot(series, approximation);
 		}
 
 		public async void StateAlgorithmPlot<T>(SquareMatrixMultiplication<T> mul, int size, int maxValue, int cycles, CancellationTokenSource token)

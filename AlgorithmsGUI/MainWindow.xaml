@@ -7,43 +7,63 @@
 		mc:Ignorable="d"
 		xmlns:oxy="http://oxyplot.org/wpf"
 		Title="Algorithm Performance" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
 
-        <ComboBox x:Name="plotSelection" 
-                  Grid.Row="0" 
-                  Margin="10,10,0,10" 
-                  Width="200" 
-                  HorizontalAlignment="Left"
-                  SelectionChanged="OnSelectionChanged">
-            <ComboBoxItem Content="Addition" />
-            <ComboBoxItem Content="Bubble sort" />
-            <ComboBoxItem Content="Bucket sort" />
-            <ComboBoxItem Content="Constant" />
-            <ComboBoxItem Content="Insertion sort" />
-            <ComboBoxItem Content="Multiplication" />
-            <ComboBoxItem Content="Polynomial naive" />
-            <ComboBoxItem Content="Polynomial horner" />
-            <ComboBoxItem Content="Pow simple" />
-            <ComboBoxItem Content="Pow recursive" />
-            <ComboBoxItem Content="Pow quick" />
-            <ComboBoxItem Content="Pow classic quick" />
-            <ComboBoxItem Content="Quick sort" />
-            <ComboBoxItem Content="Stooge sort" />
-            <ComboBoxItem Content="Tim sort" />
-            <ComboBoxItem Content="Matrix multiplication" />
-        </ComboBox>
+		<ComboBox x:Name="_PlotSelection" 
+				  Grid.Row="0" 
+				  Margin="10,10,0,10" 
+				  Width="166" 
+				  HorizontalAlignment="Left"
+				  SelectionChanged="OnSelectionChanged">
+			<ComboBoxItem Content="Addition" />
+			<ComboBoxItem Content="Bubble sort" />
+			<ComboBoxItem Content="Bucket sort" />
+			<ComboBoxItem Content="Constant" />
+			<ComboBoxItem Content="Insertion sort" />
+			<ComboBoxItem Content="Multiplication" />
+			<ComboBoxItem Content="Polynomial naive" />
+			<ComboBoxItem Content="Polynomial horner" />
+			<ComboBoxItem Content="Pow simple" />
+			<ComboBoxItem Content="Pow recursive" />
+			<ComboBoxItem Content="Pow quick" />
+			<ComboBoxItem Content="Pow classic quick" />
+			<ComboBoxItem Content="Quick sort" />
+			<ComboBoxItem Content="Stooge sort" />
+			<ComboBoxItem Content="Tim sort" />
+			<ComboBoxItem Content="Matrix multiplication" />
+		</ComboBox>
 
-        <ContentControl Grid.Row="1" Margin="10" x:Name="PlotContent">
-            <oxy:PlotView  Model="{Binding PlotModel}" />
-        </ContentControl>
-        
-        <TextBox HorizontalAlignment="Left" Margin="240,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120" Height="22"/>
-        
-        <TextBox HorizontalAlignment="Left" Margin="400,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120" Height="22"/>
-    </Grid>
+		<ContentControl Grid.Row="1" Margin="10" x:Name="PlotContent">
+			<oxy:PlotView  Model="{Binding PlotModel}" />
+		</ContentControl>
+
+		<TextBlock Text="size" 
+			Margin="190,0,500,0" VerticalAlignment="Center" Width="100" Height="22"/>
+
+		<TextBox Text="100" x:Name="_CollectionSize" 
+			HorizontalAlignment="Left" Margin="230,0,0,0" TextWrapping="Wrap" 
+			VerticalAlignment="Center" Width="120" Height="22" 
+			TextChanged="TextBox_SizeChanged" MaxLines="1"/>
+
+		<TextBlock Text="max value" 
+			Margin="360,0,320,0" VerticalAlignment="Center" Width="100" Height="22"/>
+
+		<TextBox Text="100" x:Name="_MaxValue" 
+			HorizontalAlignment="Left" Margin="440,0,0,0" TextWrapping="Wrap" 
+			VerticalAlignment="Center" Width="120" Height="22" 
+			TextChanged="TextBox_MaxValueChanged"/>
+
+		<TextBlock Text="cycles" 
+			Margin="560,0,106,0" VerticalAlignment="Center" Width="90" Height="22"/>
+
+		<TextBox Text="3" x:Name="_Cycles" 
+			HorizontalAlignment="Left" Margin="630,0,0,0" TextWrapping="Wrap" 
+			VerticalAlignment="Center" Width="120" Height="22" 
+			TextChanged="TextBox_CyclesChanged"/>
+	</Grid>
 </Window>
 

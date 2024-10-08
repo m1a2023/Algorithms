@@ -38,7 +38,7 @@ namespace Algorithms.models.Generator
         /// <param name="maxValue">The exclusive upper bound of the random number returned. <paramref name="maxValue"/> must be greater than or equal to <paramref name="minValue"/>.</param>
         /// <returns>Randomized long (64bit int) from minValue to maxValue</returns>
         public Int64 GetRandomInt64(Int64 minValue, Int64 maxValue) 
-        { 
+        {
             return random.NextInt64(minValue, maxValue); 
         }
         
