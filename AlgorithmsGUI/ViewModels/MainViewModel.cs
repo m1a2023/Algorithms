@@ -2,6 +2,9 @@
 using Algorithms.models.Algorithms.models;
 using Algorithms.models.Generator;
 using Algorithms.models.Matrix;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
 using System.Numerics;
 using System.Windows;
 
@@ -177,7 +180,7 @@ namespace AlgorithmsGUI
 
 			double a = (n * sumLogXY - sumLogX * sumY) / (n * sumLogXSquare - sumLogX * sumLogX);
 			double b = (sumY - a * sumLogX) / n;
-
+			
 			return (a, b);
 		}
 
