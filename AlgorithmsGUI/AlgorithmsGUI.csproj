@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk;Microsoft.NET.Sdk.Publish">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
@@ -7,13 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="OxyPlot.Wpf" Version="2.2.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Algorithms\Algorithms.csproj" />
   </ItemGroup>
-
 </Project>

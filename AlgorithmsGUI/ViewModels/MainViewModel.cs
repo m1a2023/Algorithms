@@ -178,6 +178,22 @@ namespace AlgorithmsGUI
 
 			return (a, b);
 		}
+		public (double a, double b) CalculateLogarithmicApproximation(double[] xApproxData, double[] yApproxData)
+		{
+			int n = xApproxData.Length;
+
+			double[] logX = xApproxData.Select(x => Math.Log(x + 1)).ToArray();
+
+			double sumLogX = logX.Sum();
+			double sumY = yApproxData.Sum();
+			double sumLogXY = logX.Zip(yApproxData, (logXVal, y) => logXVal * y).Sum();
+			double sumLogXSquare = logX.Select(logXVal => logXVal * logXVal).Sum();
+			
+			double a = (n * sumLogXY - sumLogX * sumY) / (n * sumLogXSquare - sumLogX * sumLogX);
+			double b = (sumY - a * sumLogX) / n;
+
+			return (a, b);
+		}
 
 		/// <summary></summary>
 		/// <typeparam name="T"></typeparam>
@@ -185,11 +201,10 @@ namespace AlgorithmsGUI
 		/// <param name="n"></param>
 		/// <param name="maxValue"></param>
 		/// <param name="series"></param>
-		public async Task AddPoint<T>(APow<T> algo, long factor, long exponent, LineSeries series, LineSeries approximation)
+		public async Task AddPoint<T>(APow<T> algo, long factor, long exponent, 
+			LineSeries series, LineSeries approximation, List<double> xApproxData, List<double> yApproxData)
 			where T : INumber<T>
 		{
-			var points = new List<(double, double)>();
-
 			await Task.Run(() => 
 			{
 				algo.SetData(T.CreateChecked(factor), T.CreateChecked(exponent));
@@ -197,8 +212,23 @@ namespace AlgorithmsGUI
 
 			Application.Current.Dispatcher.Invoke(() =>
 			{
-				series.Points.Add(new DataPoint(exponent, algo.GetSteps()));
+				var steps = algo.GetSteps();
+
+				series.Points.Add(new DataPoint(exponent, steps));
+				
+				xApproxData.Add(exponent);
+				yApproxData.Add(steps);
+		
+				if (xApproxData.Count > 1)
+				{
+					var (a, b) = CalculateLogarithmicApproximation(xApproxData.ToArray(), yApproxData.ToArray());
+					var approximatedY = a * exponent + b;
+				
+					approximation.Points.Add(new DataPoint(exponent, Math.Log2(approximatedY + 1)));
+				}
+
 			});
+
 		} 
 			
 		/// <summary></summary>
@@ -215,23 +245,13 @@ namespace AlgorithmsGUI
 			LineSeries series = new LineSeries { MarkerType = MarkerType.None, Color = OxyColor.FromRgb(0, 0, 0), };
 			LineSeries approximation = new LineSeries { MarkerType = MarkerType.None, Color = OxyColor.FromRgb(255, 0, 0), };
 			
+			(List<double> xApproxData, List<double> yApproxData) = (new List<double>(), new List<double>());
+			
 			for (int n = 0; n <= exponent; n++)
 			{
-				await AddPoint(algo, factor, n, series, approximation);
+				await AddPoint(algo, factor, n, series, approximation, xApproxData, yApproxData);
 			}
-
-			if (series.Points.Count > 1)
-			{
-				var lastPoint = series.Points.Last();
-				approximation.Points.Add(new DataPoint(0, algo.GetSteps())); // Starting point
-
-
-				for (double i = 1; i <= exponent; i += 0.1) // More fine-grained points for smooth curve
-				{
-					double yApprox = Math.Exp(Math.Log(series.Points.Last().Y) * (i / exponent)); // Exponential approximation
-					approximation.Points.Add(new DataPoint(i, yApprox));
-				}
-			}
+			//Logger.Write($"{approximation.Points.Count}");
 
 			UpdatePlot(series, approximation);
 		}

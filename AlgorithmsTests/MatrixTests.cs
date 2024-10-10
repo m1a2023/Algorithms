@@ -17,16 +17,6 @@ namespace AlgorithmsTests
 			SquareMatrixMultiplication<int> smm = new SquareMatrixMultiplication<int>();
 
 
-			Console.WriteLine(
-				smm.Execute(smm.GetRandomMatrix(5, 0, 1000), smm.GetRandomMatrix(5, 0, 1000)).ToString()
-				);
-
-			Console.WriteLine(
-				smm.GetExecutionTime(
-					new SquareMatrixMultiplication<int>().GetRandomMatrix(5, 0, 1000),
-					new SquareMatrixMultiplication<int>().GetRandomMatrix(5, 0, 1000)
-					)
-				);
 		}
 
 	}

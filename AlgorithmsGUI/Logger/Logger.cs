@@ -7,23 +7,21 @@ using System.Threading.Tasks;
 
 namespace AlgorithmsGUI
 {
-    public class Logger
+    public static class Logger
     {
-        private string _path = "C:\\Users\\m1a\\source\\repos\\Algorithms\\logs.txt";
-        public string Path 
+        private static string _path = "C:\\Users\\m1a\\source\\repos\\Algorithms\\logs.txt";
+        public static string Path 
         {
             get => _path;
             set => _path = value;
         }
-
-        public void Write(string message)
+        
+        public static void Write(string message)
         {
             using (StreamWriter writer = new StreamWriter(Path, true))
             {
                 writer.WriteLine($"{DateTime.Now}: {message.Replace("\n", " ")}");
             }
         }
-        
-
     }
 }
