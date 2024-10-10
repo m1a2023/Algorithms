@@ -1,23 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Numerics;
-using System.Security.Cryptography.Pkcs;
-using System.Security.Cryptography.Xml;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using Algorithms.models.Algorithms;
+﻿using Algorithms.models.Algorithms;
 using Algorithms.models.Algorithms.models;
 using Algorithms.models.Generator;
 using Algorithms.models.Matrix;
-using Algorithms.models.Measurer;
-using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
+using System.Numerics;
+using System.Windows;
 
 namespace AlgorithmsGUI
 {
@@ -43,7 +29,7 @@ namespace AlgorithmsGUI
 			_cts = new CancellationTokenSource();
 
 			PlotModel.Subtitle = algorithm;
-			
+
 			switch (algorithm)
 			{
 				case "Addition":
@@ -92,11 +78,11 @@ namespace AlgorithmsGUI
 					StateAlgorithmPlot(new TimSort<long>(), size, maxValue, cycles, _cts);
 					break;
 				case "Matrix multiplication":
-					StateAlgorithmPlot(new SquareMatrixMultiplication<int>(), size, maxValue, cycles, _cts);             
+					StateAlgorithmPlot(new SquareMatrixMultiplication<int>(), size, maxValue, cycles, _cts);
 					break;
 			}
 		}
-		
+
 		/// <summary></summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="algo"></param>
@@ -109,13 +95,13 @@ namespace AlgorithmsGUI
 			if (token.IsCancellationRequested) return;
 
 			PlotStart();
-			
+
 			LineSeries series = new LineSeries { MarkerType = MarkerType.None, Color = OxyColor.FromRgb(0, 0, 0) };
 			LineSeries approximation = new LineSeries { MarkerType = MarkerType.None, Color = OxyColor.FromRgb(255, 0, 0) };
-			
+
 			(List<double> xApproxData, List<double> yApproxData) = (new List<double>(), new List<double>());
 
-			for (int n = 1; n <= size; n ++)
+			for (int n = 1; n <= size; n++)
 			{
 				await AddPoint(algo, n, maxValue, cycles, series, approximation, xApproxData, yApproxData);
 			}
@@ -123,7 +109,7 @@ namespace AlgorithmsGUI
 			UpdatePlot(series, approximation);
 		}
 
-		public async Task AddPoint<T>(AAlgorithm<T> algo, int n, int maxValue, int cycles, 
+		public async Task AddPoint<T>(AAlgorithm<T> algo, int n, int maxValue, int cycles,
 			LineSeries series, LineSeries approximation, List<double> xApproxData, List<double> yApproxData)
 			where T : INumber<T>
 		{
@@ -150,9 +136,9 @@ namespace AlgorithmsGUI
 
 			Application.Current.Dispatcher.Invoke(() =>
 			{
-				series.Points.Add(new DataPoint(n, times[cycles /2 ]));
+				series.Points.Add(new DataPoint(n, times[cycles / 2]));
 			});
-			
+
 			xApproxData.Add(n);
 			yApproxData.Add(times.Min());
 
@@ -161,7 +147,7 @@ namespace AlgorithmsGUI
 				(double a, double b) = CalculateLinearApproximation(xApproxData.ToArray(), yApproxData.ToArray());
 				double approximatedY = a * n + b;
 
-				Application.Current.Dispatcher.Invoke(() =>  approximation.Points.Add(new DataPoint(n, Math.Abs(approximatedY))) );
+				Application.Current.Dispatcher.Invoke(() => approximation.Points.Add(new DataPoint(n, Math.Abs(approximatedY))));
 			}
 		}
 
@@ -188,7 +174,7 @@ namespace AlgorithmsGUI
 			double sumY = yApproxData.Sum();
 			double sumLogXY = logX.Zip(yApproxData, (logXVal, y) => logXVal * y).Sum();
 			double sumLogXSquare = logX.Select(logXVal => logXVal * logXVal).Sum();
-			
+
 			double a = (n * sumLogXY - sumLogX * sumY) / (n * sumLogXSquare - sumLogX * sumLogX);
 			double b = (sumY - a * sumLogX) / n;
 
@@ -201,11 +187,11 @@ namespace AlgorithmsGUI
 		/// <param name="n"></param>
 		/// <param name="maxValue"></param>
 		/// <param name="series"></param>
-		public async Task AddPoint<T>(APow<T> algo, long factor, long exponent, 
+		public async Task AddPoint<T>(APow<T> algo, long factor, long exponent,
 			LineSeries series, LineSeries approximation, List<double> xApproxData, List<double> yApproxData)
 			where T : INumber<T>
 		{
-			await Task.Run(() => 
+			await Task.Run(() =>
 			{
 				algo.SetData(T.CreateChecked(factor), T.CreateChecked(exponent));
 			});
@@ -215,43 +201,48 @@ namespace AlgorithmsGUI
 				var steps = algo.GetSteps();
 
 				series.Points.Add(new DataPoint(exponent, steps));
-				
+
 				xApproxData.Add(exponent);
 				yApproxData.Add(steps);
-		
+
 				if (xApproxData.Count > 1)
 				{
 					var (a, b) = CalculateLogarithmicApproximation(xApproxData.ToArray(), yApproxData.ToArray());
 					var approximatedY = a * exponent + b;
-				
+
 					approximation.Points.Add(new DataPoint(exponent, Math.Log2(approximatedY + 1)));
 				}
 
 			});
 
-		} 
-			
+		}
+
 		/// <summary></summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="algo"></param>
 		/// <param name="size"></param>
 		/// <param name="maxValue"></param>
 		public async void StateAlgorithmPlot<T>(APow<T> algo, long factor, long exponent, int cycles, CancellationTokenSource token)
-			where T : INumber<T>
+			where T : INumber<T>, IBinaryInteger<T>
 		{
 			if (token.IsCancellationRequested) return;
 			PlotStart(xTitle: "Steps", yTitle: "Value");
-			
+
 			LineSeries series = new LineSeries { MarkerType = MarkerType.None, Color = OxyColor.FromRgb(0, 0, 0), };
 			LineSeries approximation = new LineSeries { MarkerType = MarkerType.None, Color = OxyColor.FromRgb(255, 0, 0), };
-			
+
 			(List<double> xApproxData, List<double> yApproxData) = (new List<double>(), new List<double>());
-			
+
 			for (int n = 0; n <= exponent; n++)
 			{
 				await AddPoint(algo, factor, n, series, approximation, xApproxData, yApproxData);
 			}
-			//Logger.Write($"{approximation.Points.Count}");
+
+			if (algo is Pow.Simple<T>)
+			{
+				UpdatePlot(series);
+				return;
+			}
 
 			UpdatePlot(series, approximation);
 		}
@@ -264,9 +255,9 @@ namespace AlgorithmsGUI
 
 			LineSeries series = new LineSeries { MarkerType = MarkerType.None, Color = OxyColor.FromRgb(0, 0, 0) };
 			LineSeries approximation = new LineSeries { MarkerType = MarkerType.None, Color = OxyColor.FromRgb(255, 0, 0) };
-			 
+
 			(List<double> xApproxData, List<double> yApproxData) = (new List<double>(), new List<double>());
-			
+
 			for (int n = 0; n <= size; n++)
 			{
 				await AddPoint(mul, n, maxValue, cycles, series, approximation, xApproxData, yApproxData);
@@ -281,7 +272,7 @@ namespace AlgorithmsGUI
 		/// <param name="n"></param>
 		/// <param name="maxValue"></param>
 		/// <param name="series"></param>
-		public async Task AddPoint<T>(SquareMatrixMultiplication<T> mul, int size, int maxValue, int cycles, 
+		public async Task AddPoint<T>(SquareMatrixMultiplication<T> mul, int size, int maxValue, int cycles,
 			LineSeries series, LineSeries approximation, List<double> xApproxData, List<double> yApproxData)
 			where T : INumber<T>
 		{
@@ -321,18 +312,18 @@ namespace AlgorithmsGUI
 				ClearPlot();
 				foreach (var series in Series)
 					PlotModel.Series.Add(series);
-				
+
 				PlotDataChangedNotification();
 			});
 		}
 		private void PlotStart(String? xTitle = "Time in ms", String? yTitle = "Elements")
 		{
 			ClearAxes();
-			PlotModel.Axes.Add(new LinearAxis() { Title = xTitle, Position = AxisPosition.Left }); 
-			PlotModel.Axes.Add(new LinearAxis() { Title = yTitle, Position = AxisPosition.Bottom }); 
-		}	
+			PlotModel.Axes.Add(new LinearAxis() { Title = xTitle, Position = AxisPosition.Left });
+			PlotModel.Axes.Add(new LinearAxis() { Title = yTitle, Position = AxisPosition.Bottom });
+		}
 		private void ClearPlot() { this.PlotModel.Series.Clear(); }
 		private void PlotDataChangedNotification() { this.PlotModel.InvalidatePlot(true); }
 		private void ClearAxes() { PlotModel.Axes.Clear(); }
 	}
-} 
+}
